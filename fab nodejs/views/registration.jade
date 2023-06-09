@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title Registration Form
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
+  body
+    .container
+      h1 Registration Form
+      form(method="POST" action="")
+        .form-group
+          label(for='nameInput') Name:
+          input#nameInput.form-control(type='text', placeholder='Enter your name',name="name_input" required)
+        .form-group
+          label(for='addressInput') Address:
+          input#addressInput.form-control(type='text', placeholder='Enter your address',name="address" required)
+        .form-group
+          label(for='genderSelect') Gender:
+          select#genderSelect.form-control( name="slt_gender",required)
+            option(value='' selected disabled) Select your gender
+            option(value='male') Male
+            option(value='female') Female
+            option(value='other') Other
+        .form-group
+          label(for='dobInput') Date of Birth:
+          input#dobInput.form-control(type='date',name="date_of_birth", required)
+        .form-group
+          label(for='whatsappInput') WhatsApp Number:
+          input#whatsappInput.form-control(type='tel', placeholder='Enter your WhatsApp number',name="whatsapp_num", required)
+        .form-group
+          label(for='emailInput') Email:
+          input#emailInput.form-control(type='email', placeholder='Enter your email',name="email", required)
+        .form-group
+          label(for='passwordInput') Password:
+          input#passwordInput.form-control(type='password',name="password", placeholder='Enter your password', required)
+        button.btn.btn-primary(type='submit') Register
+
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')

@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Crop Form
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+  body
+    .container
+      h2 Crop Form
+      form(method="POST" action="" enctype="multipart/form-data")
+        
+        .form-group
+          label(for="crop-name") Crop Name:
+          input#crop-name.form-control(type="text",name="crop_name")
+        .form-group
+          label(for="crop-image") Crop Image:
+          input#crop-image.form-control-file(type="file",name="crop_image")
+        .form-group
+          label(for="quantity") Quantity:
+          input#quantity.form-control(type="number",name="quantity")
+        .form-group
+          label(for="price") Price:
+          input#price.form-control(type="number",name="price")
+        button.btn.btn-primary(type="submit",value="submit") Submit
+
+  script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")

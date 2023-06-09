@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Fertilizer Form
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+  body
+    .container
+      h2 Fertilizer Form
+      form(method="POST" action="" enctype="multipart/form-data")
+        
+        .form-group
+          label(for="fertilizer-name") Fertilizer Name:
+          input(type="text", class="form-control", name="fertilizer_name")
+        .form-group
+          label(for="fertilizer-image") Fertilizer Image:
+          input(type="file", class="form-control-file", name="fertilizer_image")
+        .form-group
+          label(for="about-fertilizer") About Fertilizer:
+          textarea(class="form-control", name="about_fertilizer", rows="3")
+        .form-group
+          label(for="manufacturing-date") Manufacturing Date:
+          input(type="date", class="form-control", name="manufacturing_date")
+        .form-group
+          label(for="expiry-date") Expiry Date:
+          input(type="date", class="form-control", name="expiry_date")
+        .form-group
+          label(for="stock-available") Stock Available:
+          input(type="number", class="form-control", name="stock_available")
+        button(type="submit", class="btn btn-primary", value="submit") Submit
+
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")

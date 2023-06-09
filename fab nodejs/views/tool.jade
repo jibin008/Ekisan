@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Tool Form
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+  body
+    .container
+      h2 Tool Form
+      form(method="POST" action="" enctype="multipart/form-data")
+        .form-group
+          label(for="tool_id") Tool ID:
+          input(type="text", class="form-control", name="tool_id")
+        .form-group
+          label(for="tool_name") Tool Name:
+          input(type="text", class="form-control", name="tool_name")
+        .form-group
+          label(for="tool_image") Tool Image:
+          input(type="file", class="form-control-file", name="tool_image")
+        .form-group
+          label(for="manufacturing_date") Manufacturing Date:
+          input(type="date", class="form-control", name="manufacturing_date")
+        .form-group
+          label(for="licence_number") License Number:
+          input(type="text", class="form-control", name ="licence_number")
+        .form-group
+          label(for="number_of_tools") Number of Tools:
+          input(type="number", class="form-control", name="number_of_tools")
+        button.btn.btn-primary(type="submit",value="submit") Submit
+
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
