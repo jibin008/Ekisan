@@ -1,35 +1,47 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Pesticide Form
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
-  body
-    .container
-      h2 Pesticide Form
-      form(method="POST" action="" enctype="multipart/form-data")
-        
-        .form-group
-          label(for="pesticide-name") Pesticide Name:
-          input(type="text", class="form-control", name="pesticide_name")
-        .form-group
-          label(for="pesticide-image") Pesticide Image:
-          input(type="file", class="form-control-file", name="pesticide_image")
-        .form-group
-          label(for="about-pesticide") About Pesticide:
-          textarea(class="form-control", name="about_pesticide", rows="3")
-        .form-group
-          label(for="manufacturing-date") Manufacturing Date:
-          input(type="date", class="form-control", name="manufacturing_date")
-        .form-group
-          label(for="expiry-date") Expiry Date:
-          input(type="date", class="form-control", name="expiry_date")
-        .form-group
-          label(for="stock-available") Stock Available:
-          input(type="number", class="form-control", name="stock_available")
-        button(type="submit", class="btn btn-primary", value="submit") Submit
+extends layout
 
-    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
+block content
+  .container
+      - if(req.session.ut == 1)
+        button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#pestModal') Add new
+    .row
+      each pest in data
+        .col-sm-6.col-md-4
+          .row
+            .col-md-4
+              .product-card
+                img(src='/uploads/' + pest.fertilizer_image, alt='Product 1', class='product-image' style="width: 200%;")
+                h3= pest.Fertilizer_Name
+                p= pest.About_Fertilizer
+                p= pest.Manufacturing_Date
+                p= pest.Expiry_Date
+                - if(req.session.ut == 1)
+                  a.btn.btn-primary.edit-button(href='editpesticide?id=' + pest.Fertilizer_ID) Edit
+    #pestModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Rertilizer
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            form(method="POST" action="" enctype="multipart/form-data")
+              
+              .form-group
+                label(for="pesticide-name") Pesticide Name:
+                input(type="text", class="form-control", name="pesticide_name")
+              .form-group
+                label(for="pesticide-image") Pesticide Image:
+                input(type="file", class="form-control-file", name="pesticide_image")
+              .form-group
+                label(for="about-pesticide") About Pesticide:
+                textarea(class="form-control", name="about_pesticide", rows="3")
+              .form-group
+                label(for="manufacturing-date") Manufacturing Date:
+                input(type="date", class="form-control", name="manufacturing_date")
+              .form-group
+                label(for="expiry-date") Expiry Date:
+                input(type="date", class="form-control", name="expiry_date")
+              .form-group
+                label(for="stock-available") Stock Available:
+                input(type="number", class="form-control", name="stock_available")
+              button(type="submit", class="btn btn-primary", value="submit") Submit

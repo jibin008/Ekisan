@@ -1,0 +1,40 @@
+
+extends layout
+block content
+  -function prettyDate(dateString){
+    //if it's already a date object and not a string you don't need this line:
+    -var date = new Date(dateString);
+    -var d = date.getDate();
+    -var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    -var m = monthNames[date.getMonth()];
+    -var y = date.getFullYear();
+    -return d+' '+m+' '+y;
+  -}
+  .container
+    .row
+      h2 Users
+      table.table
+        tr
+          th Name
+          th Contact No
+          th DOB
+          th Address
+          th Type 
+          th
+        each user in data
+          tr
+            td= user.name
+            td= user.whats_app_number
+            td= moment(user.date_of_birth).format('YYYY-MM-DD')
+            td= user.address
+            - if(user.usertype == 2)
+              td Farmer
+            - else 
+              td Public
+            - if(user.status == 0)
+              td 
+                a(href="/approve/#{user.id}") Approve 
+                a(href="/reject/#{user.id}") Reject
+            - else 
+              td
+    

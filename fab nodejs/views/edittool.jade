@@ -1,0 +1,22 @@
+extends layout
+block content
+  .container
+
+    form(method="POST" action="" enctype="multipart/form-data")
+      .form-group
+        label(for="tool_name") Tool Name:
+        input(type="text" class="form-control" name="tool_name" value=data.Tool_Name)
+      .form-group
+        label(for="tool_image") Tool Image:
+        input(type="file" class="form-control-file" name="tool_image")
+      .form-group
+        label(for="manufacturing_date") Manufacturing Date:
+        - var x = moment(data.Manufacturing_Date).format('YYYY-MM-DD')
+        input(type="date" class="form-control" name="manufacturing_date" value=x )
+      .form-group
+        label(for="licence_number") License Number:
+        input(type="text" class="form-control" name ="licence_number" value=data.License_Number)
+      .form-group
+        label(for="number_of_tools") Number of Tools:
+        input(type="number" class="form-control" name="number_of_tools" value=data.Number_of_Tools)
+      button.btn.btn-primary(type="submit",value="submit") Submit

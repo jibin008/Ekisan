@@ -4,13 +4,17 @@ var fileUpload=require("express-fileupload");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let session = require('express-session');
 var con=require("./configure/db_connection")
+var moment = require('moment');
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const bodyParser = require('body-parser');
 
 var app = express();
-
+app.use(session({ resave: true ,secret: '123456' , saveUninitialized: true}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -28,7 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter.index);
+app.use('/users', usersRouter.users);
+app.use('/login', usersRouter.login);
+app.use('/logout', usersRouter.logout);
 app.use('/crop', usersRouter.crop);
 app.use('/about', usersRouter.about);
 app.use('/registration', usersRouter.registration);
@@ -37,6 +43,13 @@ app.use('/tool', usersRouter.tool);
 app.use('/fertilicer', usersRouter.fertilicer);
 app.use('/pesticide', usersRouter.pesticide);
 app.use('/notification', usersRouter.notification);
+app.use('/editfertilizer', usersRouter.editfertilizer);
+app.use('/editpesticide', usersRouter.editpesticide);
+app.use('/edittool', usersRouter.edittool);
+app.use('/editcrop', usersRouter.editcrop);
+app.use('/approve/:id', usersRouter.approve);
+app.use('/reject/:id', usersRouter.reject);
+
 // app.use("/tool", (req, res) => {
 //   if (!req.files) {
 //     return res.status(400).send("No files were uploaded.");

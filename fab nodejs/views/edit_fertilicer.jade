@@ -1,0 +1,29 @@
+extends layout
+block content
+  .container
+    each ed in data
+      h3 #{ed.Manufacturing_Date}
+      h2 Fertilizer Form
+      form(method="POST" action="" enctype="multipart/form-data")
+        .form-group
+          label(for="fertilizer-name") Fertilizer Name:
+          input(type="text", class="form-control", value= '#{ed.Fertilizer_Name}', name="fertilizer_name")
+        .form-group
+          label(for="fertilizer-image") Fertilizer Image:
+          input(type="file", class="form-control-file", name="fertilizer_image")
+        .form-group
+          label(for="about-fertilizer") About Fertilizer:
+          textarea(class="form-control", name="about_fertilizer", rows="3") #{ed.About_Fertilizer}
+        .form-group
+          label(for="manufacturing-date") Manufacturing Date:
+          label(for="expiry-date") Expiry Date:
+          - var x = moment(ed.Manufacturing_Date).format('YYYY-MM-DD')
+          input(type="date", class="form-control", value=x, name="manufacturing_date")
+        .form-group
+          label(for="expiry-date") Expiry Date:
+          - var x = moment(ed.Expiry_Date).format('YYYY-MM-DD')
+          input(type="date", class="form-control", value=x, name="expiry_date")
+        .form-group
+          label(for="stock-available") Stock Available:
+          input(type="number", class="form-control", value='#{ed.Stock_Available}', name="stock_available")
+        button(type="submit", class="btn btn-primary", value="submit") Submit

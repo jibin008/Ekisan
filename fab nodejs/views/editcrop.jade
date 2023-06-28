@@ -1,0 +1,23 @@
+extends layout
+block content
+  .container
+    each cr in data
+      h3 #{cr.Manufacturing_Date}
+      h2 Fertilizer Form
+      form(method="POST" action="" enctype="multipart/form-data")
+        .form-group
+          label(for="crop-name") Fertilizer Name:
+          input(type="text", class="form-control", value= '#{cr.cropname}', name="crop_name")
+        .form-group
+          label(for="crop_image") Fertilizer Image:
+          input(type="file", class="form-control-file", name="crop_image")
+        .form-group
+          label(for="about-fertilizer") About Fertilizer:
+          textarea(class="form-control", name="about_fertilizer", rows="3")= cr.about_crop
+        .form-group
+          label(for="quantity") quantity:
+          input(class="form-control", name="quantity", type="number",s value= '#{cr.quantity}' rows="3") 
+        .form-group
+          label(for="manufacturing-date") Manufacturing Date:
+          input(type="number", class="form-control", value='#{cr.price}', name="price")
+        button(type="submit", class="btn btn-primary", value="submit") Submit

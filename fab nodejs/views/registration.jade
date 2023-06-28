@@ -1,9 +1,6 @@
-doctype html
-html
-  head
-    title Registration Form
-    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
-  body
+extends layout
+
+block content
     .container
       h1 Registration Form
       form(method="POST" action="")
@@ -33,5 +30,3 @@ html
           label(for='passwordInput') Password:
           input#passwordInput.form-control(type='password',name="password", placeholder='Enter your password', required)
         button.btn.btn-primary(type='submit') Register
-
-    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')

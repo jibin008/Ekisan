@@ -1,35 +1,44 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Fertilizer Form
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
-  body
-    .container
-      h2 Fertilizer Form
-      form(method="POST" action="" enctype="multipart/form-data")
-        
-        .form-group
-          label(for="fertilizer-name") Fertilizer Name:
-          input(type="text", class="form-control", name="fertilizer_name")
-        .form-group
-          label(for="fertilizer-image") Fertilizer Image:
-          input(type="file", class="form-control-file", name="fertilizer_image")
-        .form-group
-          label(for="about-fertilizer") About Fertilizer:
-          textarea(class="form-control", name="about_fertilizer", rows="3")
-        .form-group
-          label(for="manufacturing-date") Manufacturing Date:
-          input(type="date", class="form-control", name="manufacturing_date")
-        .form-group
-          label(for="expiry-date") Expiry Date:
-          input(type="date", class="form-control", name="expiry_date")
-        .form-group
-          label(for="stock-available") Stock Available:
-          input(type="number", class="form-control", name="stock_available")
-        button(type="submit", class="btn btn-primary", value="submit") Submit
+extends layout
 
-    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
+block content
+  .container
+    - if(req.session.ut == 1)
+      button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#fertModal') Add new
+    .row
+      each fer in data
+        .col-sm-6.col-md-4
+          .row
+            .col-md-4
+              .product-card
+                img(src='/uploads/' + fer.fertilizer_image, alt='Product 1', class='product-image' style="width: 200%;")
+                h4= fer.Fertilizer_Name
+                p Description of Product 1
+                - if(req.session.ut == 1)
+                  a.btn.btn-primary.edit-button(href='/editfertilizer?id=' + fer.Fertilizer_ID ) Edit
+    #fertModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Rertilizer
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            form(method="POST" action="" enctype="multipart/form-data")
+              .form-group
+                label(for="fertilizer-name") Fertilizer Name:
+                input(type="text", class="form-control", name="fertilizer_name")
+              .form-group
+                label(for="fertilizer-image") Fertilizer Image:
+                input(type="file", class="form-control-file", name="fertilizer_image")
+              .form-group
+                label(for="about-fertilizer") About Fertilizer:
+                textarea(class="form-control", name="about_fertilizer", rows="3")
+              .form-group
+                label(for="manufacturing-date") Manufacturing Date:
+                input(type="date", class="form-control", name="manufacturing_date")
+              .form-group
+                label(for="expiry-date") Expiry Date:
+                input(type="date", class="form-control", name="expiry_date")
+              .form-group
+                label(for="stock-available") Stock Available:
+                input(type="number", class="form-control", name="stock_available")
+              button(type="submit", class="btn btn-primary", value="submit") Submit

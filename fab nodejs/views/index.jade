@@ -1,6 +1,149 @@
 extends layout
 
 block content
-  h1= title
-  h2= name
-  p Welcome to #{title}
+  section#hero
+      .hero-container
+        #heroCarousel.carousel.slide.carousel-fade(data-bs-interval='5000' data-bs-ride='carousel')
+          ol#hero-carousel-indicators.carousel-indicators
+          .carousel-inner(role='listbox')
+            // Slide 1
+            .carousel-item.active(style='background-image: url(images/kisan_photos/main-bg.jpg)')
+              .carousel-container
+                .carousel-content
+                  h2.animate__animated.animate__fadeInDown
+                    | Welcome to 
+                    span eKisan
+                  p.animate__animated.animate__fadeInUp
+                    | Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.
+                  a.btn-get-started.animate__animated.animate__fadeInUp(href='') Read More
+  section#featured.featured
+    .container
+      .row
+        .col-lg-4
+          .icon-box
+            i.bi.bi-card-checklist
+            h3
+              a(href='') Lorem Ipsum
+            p
+              | Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident
+        .col-lg-4.mt-4.mt-lg-0
+          .icon-box
+            i.bi.bi-bar-chart
+            h3
+              a(href='') Dolor Sitema
+            p
+              | Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata
+        .col-lg-4.mt-4.mt-lg-0
+          .icon-box
+            i.bi.bi-binoculars
+            h3
+              a(href='') Sed ut perspiciatis
+            p
+              | Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
+  // End Featured Section
+  // ======= About Section =======
+  section#about.about
+    .container
+      .row
+        .col-lg-6
+          img.img-fluid(src='assets/img/about.jpg' alt='')
+        .col-lg-6.pt-4.pt-lg-0.content
+          h3 Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.
+          p.fst-italic
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            | magna aliqua.
+          ul
+            li
+              i.bi.bi-check-circle
+              |  Ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            li
+              i.bi.bi-check-circle
+              |  Duis aute irure dolor in reprehenderit in voluptate velit.
+            li
+              i.bi.bi-check-circle
+              |  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.
+          p
+            | Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            | velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            | culpa qui officia deserunt mollit anim id est laborum
+  // End About Section
+  // ======= Services Section =======
+  section#services.services
+    .container
+      .row
+        .col-lg-4.col-md-6.d-flex.align-items-stretch
+          .icon-box
+            .icon
+              i.bx.bxl-dribbble
+            h4
+              a(href='') Lorem Ipsum
+            p Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi
+        .col-lg-4.col-md-6.d-flex.align-items-stretch.mt-4.mt-md-0
+          .icon-box
+            .icon
+              i.bx.bx-file
+            h4
+              a(href='') Sed ut perspiciatis
+            p Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+        .col-lg-4.col-md-6.d-flex.align-items-stretch.mt-4.mt-lg-0
+          .icon-box
+            .icon
+              i.bx.bx-tachometer
+            h4
+              a(href='') Magni Dolores
+            p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        .col-lg-4.col-md-6.d-flex.align-items-stretch.mt-4
+          .icon-box
+            .icon
+              i.bx.bx-world
+            h4
+              a(href='') Nemo Enim
+            p At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+        .col-lg-4.col-md-6.d-flex.align-items-stretch.mt-4
+          .icon-box
+            .icon
+              i.bx.bx-slideshow
+            h4
+              a(href='') Dele cardo
+            p Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur
+        .col-lg-4.col-md-6.d-flex.align-items-stretch.mt-4
+          .icon-box
+            .icon
+              i.bx.bx-arch
+            h4
+              a(href='') Divera don
+            p Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur
+  // End Services Section
+  // ======= Clients Section =======
+  section#clients.clients
+    .container
+      .section-title
+        h2 Clients
+        p
+          | Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.
+      .clients-slider.swiper
+        .swiper-wrapper.align-items-center
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-1.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-2.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-3.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-4.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-5.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-6.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-7.png' alt='')
+          .swiper-slide
+            img.img-fluid(src='assets/img/clients/client-8.png' alt='')
+        .swiper-pagination
+  // End Clients Section
+  // End #main
+  
+  // End Footer
+  a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
+    i.bi.bi-arrow-up-short
+  // Vendor JS Files
