@@ -6,13 +6,20 @@ block content
       button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#cropModal') Add new
     .row
       each cp in data
-          .col-md-4
+          .col-md-4.col-lg-3
             .product-card
               img(src='/uploads/' + cp.cropimage, alt='Product 1', class='product-image')
               h4= cp.cropname
-              p Description of Product 1
-              - if(req.session.ut == 1)
-                  a.btn.btn-primary.edit-button(href='/editcrop?id=' + cp.cropid ) Edit
+              p= cp.about_drop
+              .price
+                span.label Rs:
+                span.value= cp.price
+                span.value / #{cp.unit}
+              p (#{cp.quantity} Available)
+            - if(req.session.ut == 1)
+                a.btn.btn-primary.edit-button(href='/editcrop?id=' + cp.cropid ) Edit
+            - else if(req.session.ut)
+                a.btn.btn-primary.edit-button(href='/buycrop?id=' + cp.cropid ) Buy now
     #cropModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content
@@ -33,6 +40,9 @@ block content
               .form-group
                 label(for="quantity") Quantity:
                 input#quantity.form-control(type="number",name="quantity")
+              .form-group
+                label(for="unit") Unit:
+                input(type="text" class="form-control" name="unit")
               .form-group
                 label(for="price") Price:
                 input#price.form-control(type="number",name="price")

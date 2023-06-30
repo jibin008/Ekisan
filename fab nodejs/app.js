@@ -46,6 +46,8 @@ app.use('/notification', usersRouter.notification);
 app.use('/editfertilizer', usersRouter.editfertilizer);
 app.use('/editpesticide', usersRouter.editpesticide);
 app.use('/edittool', usersRouter.edittool);
+app.use('/buy', usersRouter.buyfertilizer);
+app.use('/editseed', usersRouter.editseed);
 app.use('/editcrop', usersRouter.editcrop);
 app.use('/approve/:id', usersRouter.approve);
 app.use('/reject/:id', usersRouter.reject);

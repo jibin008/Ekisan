@@ -59,7 +59,7 @@ html(lang='en')
             li
               a.active(href='index.html') Home
             li
-              a(href='about.html') About
+              a(href='/about') About
             li
               a(href='services.html') Services
             - if(req && req.session && req.session.ut == 1)
@@ -71,11 +71,11 @@ html(lang='en')
               li
                 a(href='/pesticide') Pesticides
               li
-                a(href='/crop') Crops
+                a(href='/seed') Seeds
               li
                 a(href='/tool') Tools
             li
-              a(href='/seed') Seeds
+              a(href='/crop') Crops
             li
               a(href='contact.html') Contact
             - if(req && req.session && req.session.uid)

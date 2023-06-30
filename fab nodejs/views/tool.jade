@@ -8,10 +8,21 @@ block content
         .col-md-4
           .product-card
             img(src='/uploads/' + tl.Tool_image, alt='Product 1', class='product-image' style="width: 100%;")
-            h4 Product 1
-            p Description of Product 1
+            h4= tl.Tool_Name
+            p= tl.about_tool
+            .price
+              span.label Rs:
+              span.value= tl.hour_rent
+              span.value / hr
+            .price
+              span.label Rs:
+              span.value= tl.day_rent
+              span.value / day
+            p (#{tl.Number_of_Tools} Available)
             - if(req.session.ut == 1)
               a.btn.btn-primary.edit-button(href='edittool?id=' + tl.Tool_ID) Edit
+            - else if(req.session.ut == 2)
+              a.btn.btn-primary.edit-button(href='renttool?id=' + tl.Tool_ID) Book now
     #toolModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content
@@ -35,4 +46,10 @@ block content
               .form-group
                 label(for="number_of_tools") Number of Tools:
                 input(type="number", class="form-control", name="number_of_tools")
+              .form-group
+                label(for="dat_rent") Rent/Day:
+                input(type="text", class="form-control", name="dat_rent" value=data.day_rent)
+              .form-group
+                label(for="hour_rent") Rent/Hour:
+                input(type="text", class="form-control", name="hour_rent" value=data.hour_rent)
               button.btn.btn-primary(type="submit",value="submit") Submit

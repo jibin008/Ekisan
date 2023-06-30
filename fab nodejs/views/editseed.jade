@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .container
+    form(method="POST" action="" enctype="multipart/form-data")
+      .form-group
+        label(for="seed-name") Seed Name:
+        input(type="text", class="form-control", name="seed_name" value=sd.seed_name)
+      .form-group
+        label(for="seed-image") Seed Image:
+        input(type="file", class="form-control-file", name="seed_image")
+      .form-group
+        label(for="about-seed") About Seed:
+        textarea(class="form-control", name="about_seed", rows="3")= sd.about_seed
+      .form-group
+        label(for="manufacturing-date") Manufacturing Date:
+        - var x = moment(sd.Manufacturing_Date).format('YYYY-MM-DD')
+        input(type="date", class="form-control", name="manufacturing_date" value=x)
+      .form-group
+        label(for="expiry-date") Expiry Date:
+        - var x = moment(sd.expiry_date).format('YYYY-MM-DD')
+        input(type="date", class="form-control", name="expiry_date" value=x)
+      .form-group
+        label(for="stock-available") Stock Available:
+        input(type="number", class="form-control", name="stock_available" value=sd.stock_available)
+      .form-group
+        label(for="stock-available") Unit:
+        input(type="text", class="form-control", name="unit" value=sd.unit)
+      .form-group
+        label(for="stock-available") Unit price:
+        input(type="number", class="form-control", name="price" value= sd.price)
+      button(type="submit", class="btn btn-primary",value="submit") Submit

@@ -16,7 +16,10 @@ block content
           textarea(class="form-control", name="about_fertilizer", rows="3")= cr.about_crop
         .form-group
           label(for="quantity") quantity:
-          input(class="form-control", name="quantity", type="number",s value= '#{cr.quantity}' rows="3") 
+          input(class="form-control", name="quantity", type="number",s value= '#{cr.quantity}' rows="3")
+        .form-group
+          label(for="unit") Unit:
+          input(type="text", class="form-control", name="unit" value='#{cr.unit}')
         .form-group
           label(for="manufacturing-date") Manufacturing Date:
           input(type="number", class="form-control", value='#{cr.price}', name="price")

@@ -4,13 +4,25 @@ block content
   .container
   .row
       each sd in data
-        .col-sm-6.col-md-4
+        .col-sm-6.col-md-4.col-lg-3
           .product-card
-            img(src='/uploads/' + sd.seed_image, alt='Product 1', class='product-image' style="width: 333.33%;")
+            img(src='/uploads/' + sd.seed_image, alt='Product 1', class='product-image' style="width: 100%;")
             h4=sd.seed_name
-            p Description of Product 1
+            p= sd.about_seed
+            - var x = moment(sd.expiry_date).format('YYYY-MM-DD')
+            if(x != "Invalid date")
+              p
+                span.label Exp:
+                span.value= x
+            .price
+              span.label Rs:
+              span.value= sd.price
+              span.value / #{sd.unit}
+            p (#{sd.stock_available} Available)
             - if(req.session.ut == 1)
                 a.btn.btn-primary.edit-button(href='editseed?id=' + sd.seed_id) Edit
+            - else if(req.session.ut == 2)
+                a.btn.btn-primary.edit-button(href='buyseed?id=' + sd.seed_id) Buy now
     #seedModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content
@@ -37,4 +49,10 @@ block content
               .form-group
                 label(for="stock-available") Stock Available:
                 input(type="number", class="form-control", name="stock_available")
+              .form-group
+                label(for="stock-available") Unit:
+                input(type="text", class="form-control", name="unit")
+              .form-group
+                label(for="stock-available") Unit price:
+                input(type="number", class="form-control", name="price")
               button(type="submit", class="btn btn-primary",value="submit") Submit

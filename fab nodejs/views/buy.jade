@@ -1,0 +1,31 @@
+extends layout
+block content
+  .container
+    .product-card
+      .row
+        .col-sm-12.col-md-6
+          img(src='/uploads/' + data.fertilizer_image, alt='Product 1', class='product-image' style="width: 100%;")
+        .col-sm-12.col-md-6
+          h4= data.Fertilizer_Name
+          p= data.About_Fertilizer
+          - var x = moment(data.Expiry_Date).format('YYYY-MM-DD')
+          if(x != "Invalid date")
+            p
+              span.label Exp:
+              span.value= x
+          .price
+            span.label Rs:
+            span.value= data.price
+            span.value / #{data.unit}
+          p (#{data.Stock_Available} Available)
+    form(method="POST" action="" enctype="multipart/form-data")
+      .form-group
+        label(for="hour_rent") Quantity:
+        input(type="text", class="form-control", name="qty")
+      .form-group
+        label(for="hour_rent") Amount:
+        input(type="text", class="form-control", name="amount")
+      .form-group
+        label(for="hour_rent") Address:
+        textarea.form-control(name="address", rows="6")
+      button.btn.btn-primary(type="submit",value="submit") Submit

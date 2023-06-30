@@ -12,11 +12,21 @@ block content
               .product-card
                 img(src='/uploads/' + pest.fertilizer_image, alt='Product 1', class='product-image' style="width: 200%;")
                 h3= pest.Fertilizer_Name
-                p= pest.About_Fertilizer
-                p= pest.Manufacturing_Date
-                p= pest.Expiry_Date
+                 p= pest.About_Fertilizer
+                - var x = moment(pest.Expiry_Date).format('YYYY-MM-DD')
+                if(x != "Invalid date")
+                  p
+                    span.label Exp:
+                    span.value= x
+                .price
+                  span.label Rs:
+                  span.value= pest.price
+                  span.value / #{pest.unit}
+                  p (#{pest.Stock_Available} Available)
                 - if(req.session.ut == 1)
                   a.btn.btn-primary.edit-button(href='editpesticide?id=' + pest.Fertilizer_ID) Edit
+                - if(req.session.ut == 2)
+                  a.btn.btn-primary.edit-button(href='buypesticide?id=' + pest.Fertilizer_ID) Buy now
     #pestModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content
@@ -44,4 +54,10 @@ block content
               .form-group
                 label(for="stock-available") Stock Available:
                 input(type="number", class="form-control", name="stock_available")
+              .form-group
+                label(for="unit") Stock Available:
+                input(type="text", class="form-control", name="unit")
+              .form-group
+                label(for="price") Stock Available:
+                input(type="number", class="form-control", name="price")
               button(type="submit", class="btn btn-primary", value="submit") Submit
