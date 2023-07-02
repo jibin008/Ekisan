@@ -2,6 +2,8 @@ extends layout
 
 block content
   .container
+    - if(req.session.ut == 1)
+      button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#seedModal') Add new
   .row
       each sd in data
         .col-sm-6.col-md-4.col-lg-3
@@ -18,11 +20,22 @@ block content
               span.label Rs:
               span.value= sd.price
               span.value / #{sd.unit}
-            p (#{sd.stock_available} Available)
+            p.stock(data-st="#{sd.stock_available}") (#{sd.stock_available} Available)
             - if(req.session.ut == 1)
                 a.btn.btn-primary.edit-button(href='editseed?id=' + sd.seed_id) Edit
             - else if(req.session.ut == 2)
-                a.btn.btn-primary.edit-button(href='buyseed?id=' + sd.seed_id) Buy now
+                button.btn.btn-primary.cart-button(data-id = sd.seed_id data-type = "4" type="button" data-bs-toggle='modal' data-bs-target='#qtyModal') Add to cart
+    #qtyModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Quantity
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            .form-group
+              label(for="quantity") Quantity:
+              input#quantity.form-control(type="number",name="quantity")
+            button.btn.btn-primary.add-cart(type="submit",value="submit" data-type="4" required) Submit
     #seedModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content

@@ -1,8 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var db = require("../configure/db_connection")
+var db = require("../configure/db_connection");
 var fileUpload=require("express-fileupload");
-
+var moment = require('moment');
 var router = express.Router();
 
 
@@ -106,22 +106,24 @@ exports.seed = function(req, res) {
         } else{
           db.query ( `INSERT INTO seed_tb (seed_name,seed_image,about_seed,manufacturing_date,expiry_date,stock_available,unit, price	) VALUES ( "${req.body.seed_name}", "${uploadedFile.name}", "${req.body.about_seed}","${req.body.manufacturing_date}","${req.body.expiry_date}","${req.body.stock_available}","${req.body.unit}","${req.body.price}")`, function(err, result) {
             if (err) throw err;                  
-            res.render('seed')
+            res.redirect('/seed')
           });
         }
       })
     }
   }
-  const query = 'SELECT * FROM seed_tb';
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error executing the query:', err);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-    data = results;
-    res.render('seed', {'data': data, req: req, moment: require('moment')})
-  });
+  else {
+    const query = 'SELECT * FROM seed_tb';
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error('Error executing the query:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+      data = results;
+      res.render('seed', {'data': data, req: req, moment: require('moment')})
+    });
+  }
 }
 exports.tool = function(req, res) {
   data=[];
@@ -195,6 +197,219 @@ exports.buyfertilizer = function(req, res) {
       }
     }
   });
+}
+exports.rent = function(req, res) {
+  if(req.session.ut == 1)
+    var qry = "select a.duration, a.qty, a.duration_unit, a.booked_for, b.Tool_Name, c.name from rent_tb a JOIN tool_tb b ON a.tid = b.Tool_ID JOIN login_table c ON a.uid = c.id";
+  else
+    var qry = "select a.duration, a.qty, a.duration_unit, a.booked_for, b.Tool_Name from rent_tb a JOIN tool_tb b ON a.tid = b.Tool_ID WHERE a.uid="+req.session.uid;
+  db.query(qry, (err, results) => {
+    if (err) {
+      console.error('Error executing the query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    else {
+      res.render('rent', {req: req, moment: moment, data: results});
+    }
+  })
+}
+exports.addcart = function(req, res) {
+  var id = req.body.i;
+  var type = req.body.t;
+  var chkQry = "select * from order_tb where item_type=" + type + " and item_id = " + id +" and uid = " + req.session.uid;
+  if(type == '3') {
+    var query = "SELECT * FROM crop_tb WHERE cropid="+id;  
+  }
+  else if(type == '1') {
+    var query = "SELECT * FROM fertilicer_tb WHERE Fertilizer_ID="+id;
+  }
+  else if(type == '2') {
+    var query = "SELECT * FROM fertilicer_tb WHERE Fertilizer_ID="+id;
+  }
+  else if(type == '4') {
+    var query = "SELECT * FROM seed_tb WHERE seed_id="+id;
+  }
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing the query:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    else {
+      console.log(3333333);
+      if(req.method == "POST") {
+        var cost = parseInt(req.body.q) * parseInt(results[0].price);
+        db.query(chkQry, (err, doc) => {
+          if(err)
+            throw err;
+          else {
+            if(doc.length){
+              var qry = 'UPDATE order_tb SET qty=' + req.body.q + ', amount=' + cost + '  WHERE id = ' + doc[0].id;
+            }
+            else {
+              var qry = 'INSERT INTO order_tb(uid, item_id, qty, amount, item_type) VALUES('+ req.session.uid +', ' + id + ', ' + req.body.q + ',' + cost  + ', ' + type + ')'
+            }
+            db.query(qry, (err, ins) => {
+              if (err) {
+                throw err;
+              }   
+              res.status(200).send({ msg: 'success' });
+              
+            })
+          }
+        });
+      }
+      else {
+        res.render('buy', {'data': results[0], req: req, moment: require( 'moment' )})
+      }
+    }
+  });
+}
+exports.addrent = function(req, res) {
+  var qty = req.body.qty;
+  var addr = req.body.a;
+  var d = moment(req.body.d).format('YYYY-MM-DD');
+  var dur = req.body.dur;
+  var du = req.body.du;
+  var item = req.body.i;
+  var qry = 'INSERT INTO rent_tb(uid, qty, tid, booked_for, duration, address, duration_unit) VALUES (' + req.session.uid + ',' + qty + ', ' + item + ',"' + d + '",' + dur + ',"' + addr + '",' + du + ')';
+  console.log(qry);
+  db.query(qry, (err, ins) => {
+    if (err) {
+      throw err;
+    }   
+    res.status(200).send({ msg: 'success' });
+  })
+}
+exports.pay = function(req, res) {
+  if(req.method == "POST") {
+    var today = moment(new Date()).format('YYYY-MM-DD')
+    var qry = "select * from order_tb WHERE uid = " + req.session.uid +" and status = 0";
+    var update_qry = "UPDATE order_tb SET date = '" + today + "', status = 1 WHERE uid = " + req.session.uid +" and status = 0"
+    db.query(qry, (err, doc) => {
+      if(err)
+        throw err;
+      else {
+        if(doc.length > 0) {
+          db.query(update_qry, (err, updoc) => {
+            if(err)
+              throw err;
+            else {
+              for(var i = 0; i < doc.length; i++) {
+                if(doc[i].item_type == 1 || doc[i].item_type == 2) {
+                  var upqry = "UPDATE fertilicer_tb set Stock_Available = Stock_Available - "+doc[0].qty+" WHERE Fertilizer_ID="+doc[0].item_id;
+                  db.query(upqry, (err, results) => {
+                    if (err) {
+                      throw err;
+                    }
+                  })
+                } 
+                else if(doc[i].item_type == 3) {
+                  var upqry = "UPDATE crop_tb set quantity = quantity - "+doc[0].qty+" WHERE Fertilizer_ID="+doc[0].item_id;
+                  db.query(upqry, (err, results) => {
+                    if (err) {
+                      throw err;
+                    }
+                  })
+                }
+                else if(doc[i].item_type == 4) {
+                  var upqry = "UPDATE seed_tb set stock_available = stock_available - "+doc[0].qty+" WHERE Fertilizer_ID="+doc[0].item_id;
+                  db.query(upqry, (err, results) => {
+                    if (err) {
+                      throw err;
+                    }
+                  })
+                }
+              }
+              res.redirect('/order')
+            }
+          });
+        }
+      }
+    });
+  }
+}
+exports.order = function(req, res) {
+  var obj = {seed:[],crp: [], fer:[]};
+  if(req.session.ut == 1) {
+    var crp_qry = "select a.item_id, a.qty, a.date, a.item_type, a.amount, b.cropname as item_name, b.quantity as stock, b.cropimage as img, b.price as price, c.name from order_tb a JOIN crop_tb b ON a.item_id = b.cropid JOIN login_table c ON a.uid = c.id WHERE a.item_type = 3 and a.status = 1";
+    var fer_qry = "select a.item_id, a.qty, a.date, a.item_type, a.amount, b.Fertilizer_Name as item_name, b.Stock_Available as stock, b.fertilizer_image as img, b.price as price, c.name from order_tb a JOIN fertilicer_tb b ON a.item_id = b.Fertilizer_ID JOIN login_table c ON a.uid = c.id WHERE (a.item_type = 1 or a.item_type = 2) and a.status = 1";
+    var seed_qry = "select a.item_id, a.qty, a.date, a.item_type, a.amount, b.seed_name as item_name, b.stock_available as stock, b.seed_image as img, b.price as price, c.name from order_tb a JOIN seed_tb b ON a.item_id = b.seed_id JOIN login_table c ON a.uid = c.id WHERE a.item_type = 4 and a.status = 1";
+  }
+  else {
+    var crp_qry = "select a.item_id, a.qty, a.date, a.item_type, a.amount, b.cropname as item_name, b.quantity as stock, b.cropimage as img, b.price as price from order_tb a JOIN crop_tb b ON a.item_id = b.cropid WHERE uid = " + req.session.uid +" and a.item_type = 3 and a.status = 1";
+    var fer_qry = "select a.item_id, a.qty, a.date, a.item_type, a.amount, b.Fertilizer_Name as item_name, b.Stock_Available as stock, b.fertilizer_image as img, b.price as price from order_tb a JOIN fertilicer_tb b ON a.item_id = b.Fertilizer_ID WHERE uid = " + req.session.uid +" and (a.item_type = 1 or a.item_type = 2) and a.status = 1";
+    var seed_qry = "select a.item_id, a.qty, a.date, a.item_type, a.amount, b.seed_name as item_name, b.stock_available as stock, b.seed_image as img, b.price as price from order_tb a JOIN seed_tb b ON a.item_id = b.seed_id WHERE uid = " + req.session.uid +" and a.item_type = 4 and a.status = 1";
+  }
+  db.query(crp_qry, (err, doc) => {
+    if(err)
+      throw err;
+    else {
+      if(doc.length)
+        obj['crp'] = doc
+      db.query(fer_qry, (err, ferdoc) => {
+        if(err)
+          throw err;
+        else {
+          if(ferdoc.length)
+            obj['fer'] = ferdoc
+          db.query(seed_qry, (err, seeddoc) => {
+            if(err)
+              throw err;
+            else {
+              if(seeddoc.length)
+                obj['seed'] = seeddoc
+              res.render('orders', {'data': obj, req: req, moment: moment})
+            }
+          })
+        }
+      })
+    }
+  })
+}
+exports.cart = function(req, res) {
+  if(req.method == "POST") {
+    var qry = "UPDATE order_tb SET address = '" + req.body.address + "' WHERE uid = " + req.session.uid +" and status = 0"
+    db.query(qry, (err, doc) => {
+      if(err)
+        throw err;
+      else {
+        res.render('pay', {'data': req.body.amount, req: req, moment: require( 'moment' )})
+      }
+    });
+  }
+  else {
+    var obj = {seed:[],crp: [], fer:[]};
+    var crp_qry = "select a.item_id, a.qty, a.item_type, a.amount, b.cropname as item_name, b.quantity as stock, b.cropimage as img, b.price as price from order_tb a JOIN crop_tb b ON a.item_id = b.cropid WHERE uid = " + req.session.uid +" and a.item_type = 3 and status = 0";
+    var fer_qry = "select a.item_id, a.qty, a.item_type, a.amount, b.Fertilizer_Name as item_name, b.Stock_Available as stock, b.fertilizer_image as img, b.price as price from order_tb a JOIN fertilicer_tb b ON a.item_id = b.Fertilizer_ID WHERE uid = " + req.session.uid +" and (a.item_type = 1 or a.item_type = 2) and status = 0";
+    var seed_qry = "select a.item_id, a.qty, a.item_type, a.amount, b.seed_name as item_name, b.stock_available as stock, b.seed_image as img, b.price as price from order_tb a JOIN seed_tb b ON a.item_id = b.seed_id WHERE uid = " + req.session.uid +" and a.item_type = 4 and status = 0";
+    db.query(crp_qry, (err, doc) => {
+      if(err)
+        throw err;
+      else {
+        if(doc.length)
+          obj['crp'] = doc
+        db.query(fer_qry, (err, ferdoc) => {
+          if(err)
+            throw err;
+          else {
+            if(ferdoc.length)
+              obj['fer'] = ferdoc
+            db.query(seed_qry, (err, seeddoc) => {
+              if(err)
+                throw err;
+              else {
+                if(seeddoc.length)
+                  obj['seed'] = seeddoc
+                res.render('cart', {'data': obj, req: req})
+              }
+            })
+          }
+        })
+      }
+    })
+  }
 }
 exports.fertilicer = function(req, res) {
 data=[];

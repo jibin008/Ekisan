@@ -47,6 +47,12 @@ app.use('/editfertilizer', usersRouter.editfertilizer);
 app.use('/editpesticide', usersRouter.editpesticide);
 app.use('/edittool', usersRouter.edittool);
 app.use('/buy', usersRouter.buyfertilizer);
+app.use('/cart', usersRouter.cart)
+app.use('/order', usersRouter.order)
+app.use('/pay', usersRouter.pay)
+app.use('/rent', usersRouter.rent)
+app.use('/addcart', usersRouter.addcart);
+app.use('/addrent', usersRouter.addrent);
 app.use('/editseed', usersRouter.editseed);
 app.use('/editcrop', usersRouter.editcrop);
 app.use('/approve/:id', usersRouter.approve);

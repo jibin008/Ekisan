@@ -22,11 +22,22 @@ block content
                   span.label Rs:
                   span.value= pest.price
                   span.value / #{pest.unit}
-                  p (#{pest.Stock_Available} Available)
+                  p.stock(data-st="#{pest.Stock_Available}") (#{pest.Stock_Available} Available)
                 - if(req.session.ut == 1)
                   a.btn.btn-primary.edit-button(href='editpesticide?id=' + pest.Fertilizer_ID) Edit
                 - if(req.session.ut == 2)
-                  a.btn.btn-primary.edit-button(href='buypesticide?id=' + pest.Fertilizer_ID) Buy now
+                  button.btn.btn-primary.cart-button(data-id = pest.Fertilizer_ID data-type = "2" type="button" data-bs-toggle='modal' data-bs-target='#qtyModal') Add to cart
+    #qtyModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Quantity
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            .form-group
+              label(for="quantity") Quantity:
+              input#quantity.form-control(type="number",name="quantity")
+            button.btn.btn-primary.add-cart(type="submit",value="submit" data-type="2" required) Submit
     #pestModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content

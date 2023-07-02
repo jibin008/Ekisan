@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  .container
+    .row
+      -var x = 0;
+      table.table
+        tr 
+          th Item 
+          th Category
+          th Quantiry 
+          th Price 
+        each i in data.seed
+          - x += parseInt(i.amount)
+          tr
+            td= i.item_name
+            td
+              if(i.item_type == "1")
+                p Fertilizer
+              if(i.item_type == "2")
+                p Pesticide
+              if(i.item_type == "3")
+                p Crop
+              if(i.item_type == "4")
+                p Seed
+            td= i.qty
+            td= i.amount
+        each i in data.fer
+          - x += parseInt(i.amount)
+          tr
+            td= i.item_name
+            td
+              if(i.item_type == "1")
+                p Fertilizer
+              if(i.item_type == "2")
+                p Pesticide
+              if(i.item_type == "3")
+                p Crop
+              if(i.item_type == "4")
+                p Seed
+            td= i.qty
+            td= i.amount
+        each i in data.crp
+          - x += parseInt(i.amount)
+          tr
+            td= i.item_name
+            td
+              if(i.item_type == "1")
+                p Fertilizer
+              if(i.item_type == "2")
+                p Pesticide
+              if(i.item_type == "3")
+                p Crop
+              if(i.item_type == "4")
+                p Seed
+            td= i.qty
+            td= i.amount
+      if(data.seed.length > 0 || data.crp.length > 0 || data.fer.length > 0)
+        form(method="POST" action="" enctype="multipart/form-data")
+          .form-group
+            input(type="hidden", name="amount" value= "#{x}")
+            label(for="hour_rent") Delivery Address:
+            textarea.form-control(name="address", rows="6")
+          button.btn.btn-primary(type="submit",value="submit") Submit

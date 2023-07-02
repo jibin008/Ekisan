@@ -18,11 +18,38 @@ block content
               span.label Rs:
               span.value= tl.day_rent
               span.value / day
-            p (#{tl.Number_of_Tools} Available)
+            p.stock(data-st="#{tl.Number_of_Tools}") (#{tl.Number_of_Tools} Available)
             - if(req.session.ut == 1)
               a.btn.btn-primary.edit-button(href='edittool?id=' + tl.Tool_ID) Edit
             - else if(req.session.ut == 2)
-              a.btn.btn-primary.edit-button(href='renttool?id=' + tl.Tool_ID) Book now
+              button.btn.btn-success.book-tool(type="button" data-bs-toggle='modal' data-bs-target='#rentModal' data-id="#{tl.Tool_ID}") Book now
+    #rentModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Rent Details
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            .form-group
+              label(for="quantity") Number of tools Required:
+              input#quantity.form-control(type="number",name="quantity")
+            .form-group
+              label(for="address") Field address:
+              textarea#address.form-control(name="address", rows="5")
+            .form-group
+              label(for="date") Date:
+              input#date.form-control(type="date",name="date")
+            .form-group
+              label(for="duration") Duration:
+              .row
+                .col-sm-6
+                  input#dur.form-control.col(type="numver",name="duration")
+                .col-sm-6
+                  select#dur-unit.col.form-control.col(name="unit")
+                    option(value="1") Day
+                    option(value="2") Hr  
+
+            button.btn.btn-primary.add-rent(type="submit",value="submit" data-type="2" required) Submit
     #toolModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content

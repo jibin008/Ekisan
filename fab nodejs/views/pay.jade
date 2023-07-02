@@ -1,0 +1,18 @@
+extends layout
+block content
+  .container
+    .product-card
+      .row
+        .col-sm-12
+          p Amount to be paid: #{data}
+          form(method="POST" action="/pay" enctype="multipart/form-data")
+            .form-group
+              input(type="number", class="form-control", name="cnum" placeholder="Card Number")
+            .form-group
+              input(type="text", class="form-control", name="cname" placeholder="Name on Card")
+            .form-group
+              input(type="text", class="form-control", name="cexp" placeholder="Expiry Date")
+            .form-group
+              input(type="number", class="form-control", name="cvv" placeholder="CVV")
+            button.btn.btn-primary(type="submit",value="submit") Pay
+            button.btn.btn-primary(type="reset",value="submit") Reset

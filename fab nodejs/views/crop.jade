@@ -8,18 +8,29 @@ block content
       each cp in data
           .col-md-4.col-lg-3
             .product-card
-              img(src='/uploads/' + cp.cropimage, alt='Product 1', class='product-image')
+              img(src='/uploads/' + cp.cropimage, alt='Product 1', class='product-image' width= '100%')
               h4= cp.cropname
               p= cp.about_drop
               .price
                 span.label Rs:
                 span.value= cp.price
                 span.value / #{cp.unit}
-              p (#{cp.quantity} Available)
+              p.stock(data-st="#{cp.quantity}") (#{cp.quantity} Available)
             - if(req.session.ut == 1)
                 a.btn.btn-primary.edit-button(href='/editcrop?id=' + cp.cropid ) Edit
             - else if(req.session.ut)
-                a.btn.btn-primary.edit-button(href='/buycrop?id=' + cp.cropid ) Buy now
+                button.btn.btn-primary.cart-button(data-id = cp.cropid data-type = "3" type="button" data-bs-toggle='modal' data-bs-target='#qtyModal') Add to cart
+    #qtyModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Quantity
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            .form-group
+              label(for="quantity") Quantity:
+              input#quantity.form-control(type="number",name="quantity")
+            button.btn.btn-primary.add-cart(type="submit",value="submit" data-type="3" required) Submit
     #cropModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content

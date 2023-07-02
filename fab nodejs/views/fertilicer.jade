@@ -22,11 +22,22 @@ block content
                   span.label Rs:
                   span.value= fer.price
                   span.value / #{fer.unit}
-                p (#{fer.Stock_Available} Available)
+                p.stock(data-st="#{fer.Stock_Available}") (#{fer.Stock_Available} Available)
                 - if(req.session.ut == 1)
                   a.btn.btn-primary.edit-button(href='/editfertilizer?id=' + fer.Fertilizer_ID ) Edit
                 - if(req.session.ut == 2)
-                  a.btn.btn-primary.edit-button(href='/buy?id=' + fer.Fertilizer_ID ) Buy now
+                  button.btn.btn-primary.cart-button(data-id = fer.Fertilizer_ID data-type = "1" type="button" data-bs-toggle='modal' data-bs-target='#qtyModal') Add to cart
+    #qtyModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Quantity
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            .form-group
+              label(for="quantity") Quantity:
+              input#quantity.form-control(type="number",name="quantity")
+            button.btn.btn-primary.add-cart(type="submit",value="submit" data-type="1" required) Submit
     #fertModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content

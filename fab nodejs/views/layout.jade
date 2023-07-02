@@ -51,7 +51,7 @@ html(lang='en')
       .container.d-flex.justify-content-between.align-items-center
         .logo
           h1
-            a(href='index.html') eKisan
+            a(href='index.html') e-Kisan
           // Uncomment below if you prefer to use an image logo
           // <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
         nav#navbar.navbar
@@ -60,8 +60,6 @@ html(lang='en')
               a.active(href='index.html') Home
             li
               a(href='/about') About
-            li
-              a(href='services.html') Services
             - if(req && req.session && req.session.ut == 1)
               li
                 a(href='/users') Users
@@ -74,13 +72,20 @@ html(lang='en')
                 a(href='/seed') Seeds
               li
                 a(href='/tool') Tools
+              li
+                a(href='/rent') Rent
             li
               a(href='/crop') Crops
             li
               a(href='contact.html') Contact
+            - if(req && req.session && req.session.ut && req.session.ut != 1)
+              li
+                a(href='/cart') Cart
             - if(req && req.session && req.session.uid)
               li
-                  a(href='/logout') Logout
+                a(href='/order') Orders
+              li
+                a(href='/logout') Logout
             - else
               li.dropdown
                 a(href='#')
@@ -105,8 +110,10 @@ html(lang='en')
       script(src='vendor/waypoints/noframework.waypoints.js')
       script(src='vendor/php-email-form/validate.js')
       // Template Main JS File
+      script(src='js/jquery.min.js')
+      script(src='js/script.js')
       script(src='js/main.js')
-    // ======= Footer =======
+    // ======= Footer ======= 
   footer#footer
     .footer-top
       .container

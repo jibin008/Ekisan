@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container
+    .row
+      -var x = 0;
+      - var d = new Date();
+      table.table
+        tr 
+          if(req.session.ut == 1)
+            th Booked By
+          th Item 
+          th Date
+          th Quantity
+          th Duration
+        each i in data
+          - d = moment(new Date(i.booked_for)).format('YYYY-MM-DD')
+          tr
+            if(req.session.ut == 1)
+              td= i.name
+            td= i.Tool_Name
+            td= d
+            td= i.qty
+            td= i.duration + " " + (i.duration_unit=='1'?'Day':"Hr")
