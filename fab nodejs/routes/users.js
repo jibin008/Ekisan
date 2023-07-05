@@ -217,7 +217,7 @@ exports.rent = function(req, res) {
 exports.addcart = function(req, res) {
   var id = req.body.i;
   var type = req.body.t;
-  var chkQry = "select * from order_tb where item_type=" + type + " and item_id = " + id +" and uid = " + req.session.uid;
+  var chkQry = "select * from order_tb where item_type=" + type + " and status = 0 and item_id = " + id +" and uid = " + req.session.uid;
   if(type == '3') {
     var query = "SELECT * FROM crop_tb WHERE cropid="+id;  
   }
@@ -245,7 +245,7 @@ exports.addcart = function(req, res) {
             throw err;
           else {
             if(doc.length){
-              var qry = 'UPDATE order_tb SET qty=' + req.body.q + ', amount=' + cost + '  WHERE id = ' + doc[0].id;
+              var qry = 'UPDATE order_tb SET qty=' + req.body.q + ', amount=' + cost + '  WHERE id = ' + doc[0].id + ' and status = 0' ;
             }
             else {
               var qry = 'INSERT INTO order_tb(uid, item_id, qty, amount, item_type) VALUES('+ req.session.uid +', ' + id + ', ' + req.body.q + ',' + cost  + ', ' + type + ')'

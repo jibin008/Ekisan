@@ -63,9 +63,6 @@ $(document).ready(function(){
             var qty = parseInt($(this).parent().find('#quantity').val());
             var type = $(this).attr('data-type');
             var item = $(this).attr('data-id');
-            console.log(qty);
-            console.log(type);
-            console.log(item);
             $.ajax({
                 url: '/addcart',
                 data: { 

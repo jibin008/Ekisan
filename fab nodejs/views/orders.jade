@@ -71,10 +71,3 @@ block content
             td= d
             td= i.qty
             td= i.amount
-      if(data.seed.length > 0 || data.crp.length > 0 || data.fer.length > 0)
-        form(method="POST" action="" enctype="multipart/form-data")
-          .form-group
-            input(type="hidden", name="amount" value= "#{x}")
-            label(for="hour_rent") Delivery Address:
-            textarea.form-control(name="address", rows="6")
-          button.btn.btn-primary(type="submit",value="submit") Submit
