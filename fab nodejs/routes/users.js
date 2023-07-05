@@ -306,7 +306,7 @@ exports.pay = function(req, res) {
                   })
                 } 
                 else if(doc[i].item_type == 3) {
-                  var upqry = "UPDATE crop_tb set quantity = quantity - "+doc[0].qty+" WHERE Fertilizer_ID="+doc[0].item_id;
+                  var upqry = "UPDATE crop_tb set quantity = quantity - "+doc[0].qty+" WHERE cropid="+doc[0].item_id;
                   db.query(upqry, (err, results) => {
                     if (err) {
                       throw err;
@@ -314,7 +314,7 @@ exports.pay = function(req, res) {
                   })
                 }
                 else if(doc[i].item_type == 4) {
-                  var upqry = "UPDATE seed_tb set stock_available = stock_available - "+doc[0].qty+" WHERE Fertilizer_ID="+doc[0].item_id;
+                  var upqry = "UPDATE seed_tb set stock_available = stock_available - "+doc[0].qty+" WHERE seed_id="+doc[0].item_id;
                   db.query(upqry, (err, results) => {
                     if (err) {
                       throw err;
