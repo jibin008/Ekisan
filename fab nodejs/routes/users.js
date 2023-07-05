@@ -519,10 +519,10 @@ exports.registration = function(req, res) {
     var utval = 0;
     var stat = 0;
     if(ut == "f") {
-      utval = 3;
+      utval = 2;
     }
     else if(ut == "p") {
-      utval = 2;
+      utval = 3;
       stat = 1;
     }
     if(utval != 0) {
