@@ -267,7 +267,7 @@ exports.addcart = function(req, res) {
   });
 }
 exports.addrent = function(req, res) {
-  var qty = req.body.qty;
+  var qty = req.body.q;
   var addr = req.body.a;
   var d = moment(req.body.d).format('YYYY-MM-DD');
   var dur = req.body.dur;

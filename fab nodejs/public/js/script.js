@@ -15,7 +15,6 @@ $(document).ready(function(){
         var du = $('#rentModal #dur-unit').val();
         var item = $(this).attr('data-id');
         var x = 1;
-        alert(qty)
         if(!qty || qty == "" || parseInt(qty) > parseInt($(this).attr('data-st'))) {
             alert('Quantity should be less than or equal to ' + $(this).attr('data-st'));
         }
