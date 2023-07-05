@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2023 at 08:36 AM
+-- Generation Time: Jul 05, 2023 at 12:21 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -112,7 +112,7 @@ INSERT INTO `fertilicer_tb` (`type`, `Fertilizer_ID`, `Fertilizer_Name`, `About_
 ('fertilizer', 596, 'jk', 'hjbj', '2023-06-17', '2023-06-25', 8, 'sHRDAYA pics.jpg', '', 0),
 ('fertilizer', 597, 'jnjknk', 'knk', '2023-06-14', '2023-06-16', 5, 'sHRDAYA pics.jpg', '', 0),
 ('fertilicer', 598, 'frt', 'abt', '0000-00-00', '0000-00-00', 0, '9781408856772_Z.jpg', 'Kg', 70),
-('fertilicer', 599, 'new name', 'bjkb', '2023-06-20', '2023-08-04', 5, 'WhatsApp Image 2023-02-09 at 00.37.27.jpg', '', 0),
+('fertilicer', 599, 'new name', 'bjkb', '2023-06-20', '2023-08-04', 3, 'WhatsApp Image 2023-02-09 at 00.37.27.jpg', '', 0),
 ('fertilicer', 600, 'sarath', 'jkjkllk', '2000-11-09', '2023-06-26', 1, 'kandam.jpg', '', 0),
 ('fertilicer', 601, 'sharukh', 'gvjh ikjkj', '0000-00-00', '0000-00-00', 10, 'goods carier.jpg', '', 0),
 ('fertilicer', 602, 'jak', 'it was good', '2023-06-22', '2023-06-30', 10, 'RiceHarvest.jpg', '', 0),
@@ -181,17 +181,52 @@ CREATE TABLE `order_tb` (
   `qty` int(11) NOT NULL,
   `address` varchar(200) NOT NULL,
   `amount` int(11) NOT NULL,
-  `item_type` int(11) NOT NULL COMMENT '1: fer\r\n2: pest\r\n3: crop\r\n4: seed'
+  `item_type` int(11) NOT NULL COMMENT '1: fer\r\n2: pest\r\n3: crop\r\n4: seed',
+  `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `order_tb`
 --
 
-INSERT INTO `order_tb` (`id`, `uid`, `item_id`, `date`, `qty`, `address`, `amount`, `item_type`) VALUES
-(1, 3, 600, '2023-06-30', 1, '', 0, 1),
-(2, 3, 603, '2023-06-30', 2, '', 0, 1),
-(3, 3, 603, '2023-06-30', 20, 'jjjhhdjhd', 0, 1);
+INSERT INTO `order_tb` (`id`, `uid`, `item_id`, `date`, `qty`, `address`, `amount`, `item_type`, `status`) VALUES
+(1, 3, 600, '0000-00-00', 1, 'undefined', 3, 1, 1),
+(2, 3, 603, '0000-00-00', 2, 'undefined', 5, 1, 1),
+(3, 3, 603, '0000-00-00', 20, 'undefined', 34, 1, 1),
+(4, 3, 1, '0000-00-00', 3, 'undefined', 32, 3, 1),
+(5, 3, 599, '2023-07-02', 2, 'asss', 3, 1, 1),
+(6, 3, 590, '0000-00-00', 3, 'undefined', 2, 2, 1),
+(7, 3, 14, '0000-00-00', 5, 'undefined', 45, 4, 1),
+(8, 3, 55, '2023-07-02', 3, '', 12, 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rent_tb`
+--
+
+CREATE TABLE `rent_tb` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `tid` int(11) NOT NULL,
+  `booking_date` date NOT NULL DEFAULT current_timestamp(),
+  `booked_for` date NOT NULL,
+  `duration` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `address` varchar(200) NOT NULL,
+  `duration_unit` int(11) NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rent_tb`
+--
+
+INSERT INTO `rent_tb` (`id`, `uid`, `tid`, `booking_date`, `booked_for`, `duration`, `status`, `address`, `duration_unit`, `qty`) VALUES
+(1, 3, 1, '2023-07-02', '0000-00-00', 2, 0, 'lkj', 2, 1),
+(2, 3, 4555, '2023-07-02', '0000-00-00', 3, 0, 'r', 1, 1),
+(3, 3, 1, '2023-07-02', '0000-00-00', 2, 0, '222', 2, 1),
+(4, 3, 4555, '2023-07-02', '2023-07-20', 2, 0, '222', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +256,8 @@ INSERT INTO `seed_tb` (`seed_id`, `seed_name`, `seed_image`, `about_seed`, `manu
 (14, 'arunthathi', '7-year-old_prodigy_becomes_the_1200x768.webp', 'it was good', '2023-06-29', '2023-06-24', 9, 'Kg', 9),
 (15, 'jwala', 'WhatsApp Image 2023-02-09 at 00.37.27.jpg', 'jj jkjkj', '2023-06-10', '2023-06-30', 3, '', 0),
 (16, 'rama', 'nss.png', 'about rmanan', '2023-06-14', '2023-06-30', 4, '', 0),
-(17, 'jjgh', 'pestisides.jpg', 'mmmk', '2023-06-30', '2023-07-09', 5, '', 0);
+(17, 'jjgh', 'pestisides.jpg', 'mmmk', '2023-06-30', '2023-07-09', 5, '', 0),
+(18, 'jjh', '7-year-old_prodigy_becomes_the_1200x768.webp', 'aaa', '2023-06-30', '2023-07-20', 2, 'Kg', 23);
 
 -- --------------------------------------------------------
 
@@ -296,6 +332,12 @@ ALTER TABLE `order_tb`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rent_tb`
+--
+ALTER TABLE `rent_tb`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `seed_tb`
 --
 ALTER TABLE `seed_tb`
@@ -345,13 +387,19 @@ ALTER TABLE `notification_tb`
 -- AUTO_INCREMENT for table `order_tb`
 --
 ALTER TABLE `order_tb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `rent_tb`
+--
+ALTER TABLE `rent_tb`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `seed_tb`
 --
 ALTER TABLE `seed_tb`
-  MODIFY `seed_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `seed_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tool_tb`

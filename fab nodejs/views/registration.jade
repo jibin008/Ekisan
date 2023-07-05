@@ -13,7 +13,7 @@ block content
         .form-group
           label(for='genderSelect') Gender:
           select#genderSelect.form-control( name="slt_gender",required)
-            option(value='' selected disabled) Select your gender
+            option(value='-1' selected disabled) Select your gender
             option(value='male') Male
             option(value='female') Female
             option(value='other') Other
@@ -29,4 +29,4 @@ block content
         .form-group
           label(for='passwordInput') Password:
           input#passwordInput.form-control(type='password',name="password", placeholder='Enter your password', required)
-        button.btn.btn-primary(type='submit') Register
+        button.btn.btn-primary.register(type='submit') Register
