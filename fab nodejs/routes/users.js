@@ -515,18 +515,15 @@ exports.about = function(req, res) {
 exports.registration = function(req, res) {
   if(req.method == 'POST') {   
     // var abc = ;
-    var ut = (req.query['u']?req.query['u'].trim().toLowerCase():'');
+    var ut = (req.query['u']?req.query['u'].trim().toLowerCase():'p');
     var utval = 0;
     var stat = 0;
-    if(ut == "p") {
-      stat = 1;
-      utval = 4;
-    }
-    else if(ut == "f") {
+    if(ut == "f") {
       utval = 3;
     }
-    else if(ut == "o") {
+    else if(ut == "p") {
       utval = 2;
+      stat = 1;
     }
     if(utval != 0) {
       db.query(`INSERT INTO login_table (
