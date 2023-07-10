@@ -491,18 +491,44 @@ exports.pesticide = function(req, res) {
       res.render('pesticide', {'data': data, req: req, moment: require( 'moment' )})
   });
 }
-
-exports.notification = function(req, res) {
+exports.profile = function(req, res) {
   if(req.method == 'POST') {
-    db.query ( `INSERT INTO notification_tb (	Notification_ID,Notification_Content		
-      ) VALUES ("${req.body.notification_id}", "${req.body. notification_content}")`,function(err, result) {
+    db.query ( 'UPDATE login_table SET password= "' + req.body.password + '" WHERE id='+req.session.uid,function(err, result) {
       if (err) throw err;
-      // console.log('record inserted');
-      
-      res.redirect('/');
+      db.query ( 'SELECT * FROM login_table where id='+ req.session.uid,function(err, result) {
+        if (err) throw err;
+        res.render('profile', {req:req, me: result[0], moment: moment, stat:1})
+      })
     });
   }
-  res.render('notification')
+  else {
+    db.query ( 'SELECT * FROM login_table where id='+ req.session.uid,function(err, result) {
+      if (err) throw err;
+      res.render('profile', {req:req, me: result[0], moment: moment})
+    })
+  }
+};
+exports.delnote = function(req, res) {
+  var id=req.query['i']
+  db.query ( 'DELETE FROM notification_tb WHERE Notification_ID='+ id,function(err, result) {
+    if (err) throw err;
+    res.redirect('/notification');
+  });
+}
+exports.notification = function(req, res) {
+  if(req.method == 'POST') {
+    db.query ( `INSERT INTO notification_tb (	link, Notification_Content
+      ) VALUES ("${req.body.link}", "${req.body. notification_content}")`,function(err, result) {
+      if (err) throw err;
+      res.redirect('/notification');
+    });
+  }
+  else {
+    db.query ( 'SELECT * FROM notification_tb',function(err, result) {
+      if (err) throw err;
+      res.render('notification', {req:req, notes: result})
+    })
+  }
 };
 exports.about = function(req, res) {
   if(req.method == 'POST') {

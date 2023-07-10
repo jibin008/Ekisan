@@ -7,6 +7,16 @@ $(document).ready(function(){
         var st = $(this).parent().find('.stock').attr('data-st');
         $('#rentModal .add-rent').attr('data-st', st).attr('data-id', $(this).attr('data-id'))
     })
+    $('.edit-profile').on('click', function(){
+        if($('#password').val().trim().length == 0) {
+            alert("Password field is required")
+            return false;
+        }
+        else if($('#password').val().trim() != $('#conf-password').val().trim()) {
+            alert("Password and Confirm password sholud be same");
+            return false;
+        }
+    })
     $('#rentModal .add-rent').on('click', function(){
         var qty = $('#rentModal #quantity').val();
         var addr = $('#rentModal #address').val();

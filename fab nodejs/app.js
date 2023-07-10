@@ -32,6 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/profile', usersRouter.profile);
 app.use('/users', usersRouter.users);
 app.use('/login', usersRouter.login);
 app.use('/logout', usersRouter.logout);
@@ -43,6 +44,7 @@ app.use('/tool', usersRouter.tool);
 app.use('/fertilicer', usersRouter.fertilicer);
 app.use('/pesticide', usersRouter.pesticide);
 app.use('/notification', usersRouter.notification);
+app.use('/delete-notification', usersRouter.delnote);
 app.use('/editfertilizer', usersRouter.editfertilizer);
 app.use('/editpesticide', usersRouter.editpesticide);
 app.use('/edittool', usersRouter.edittool);

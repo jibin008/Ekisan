@@ -1,22 +1,35 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Notification Form
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
-  body
-    .container
-      h2 Notification Form
-      form(method="post", action="")
-        .form-group
-          label(for="notification-id") Notification ID:
-          input(type="text", class="form-control", name="notification_id")
-        .form-group
-          label(for="notification-content") Notification Content:
-          textarea(class="form-control", name="notification_content", rows="3")
-        button(type="submit", class="btn btn-primary", value="submit") Submit
+extends layout
 
-    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
+block content
+  .container
+    - if(req.session.ut == 1)
+      button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#notestModal') Add new
+    .row
+      table.table 
+        tr 
+          th Notification content
+          th Notification Link
+          th
+        each x in notes
+          tr 
+            td= x.Notification_Content
+            td
+              a(href=x.link target="_blank")= x.link
+            td 
+              a(href="/delete-notification?i="+x.Notification_ID) Delete
+    #notestModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Add Rertilizer
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            h2 Notification Form
+            form(method="post", action="")
+              .form-group
+                label(for="notification-content") Notification Content:
+                textarea(class="form-control", name="notification_content", rows="3")
+              .form-group
+                label(for="link") Link:
+                input(type="text", class="form-control", name="link")
+              button(type="submit", class="btn btn-primary", value="submit") Submit

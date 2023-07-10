@@ -1,6 +1,17 @@
 extends layout
 
 block content
+  .notifications.row
+    .col-sm-12
+      .nots
+        if(nt.length != 0)
+          marquee 
+            span Latest notifications: 
+            each x in nt
+                span= x.Notification_Content
+                span 
+                  a(href=x.link target="_blank") Click here
+                span   |  
   section#hero
       .hero-container
         #heroCarousel.carousel.slide.carousel-fade(data-bs-interval='5000' data-bs-ride='carousel')

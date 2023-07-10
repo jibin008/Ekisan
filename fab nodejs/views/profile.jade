@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    .container
+      h1 Profile
+      - if(stat == 1)
+          script.
+            alert("Password updated")
+      form(method="POST" action="")
+        .form-group
+          label(for='nameInput') Name:
+          input#nameInput.form-control(type='text', placeholder='Enter your name',name="name_input" value=me.name disabled)
+        .form-group
+          label(for='addressInput') Address:
+          input#addressInput.form-control(type='text', placeholder='Enter your address',name="address" value=me.address disabled)
+        .form-group
+          label(for='genderSelect') Gender:
+          input#addressInput.form-control(type='text', placeholder='Enter your address',name="address" value=me.gender disabled)
+        .form-group
+          label(for='dobInput') Date of Birth:
+          - var x = moment(me.date_of_birth).format('YYYY-MM-DD')
+          input#dobInput.form-control(type='text',name="date_of_birth" value=x disabled)
+        .form-group
+          label(for='whatsappInput') WhatsApp Number:
+          input#whatsappInput.form-control(type='tel', placeholder='Enter your WhatsApp number',name="whatsapp_num" value=me.whata_app_number disabled)
+        .form-group
+          label(for='emailInput') Email:
+          input#emailInput.form-control(type='email', placeholder='Enter your email',name="email" value=me.email_id disabled)
+        .form-group
+          label(for='passwordInput') Password:
+          input#password.form-control(type='password',name="password", placeholder='Enter New password', required)
+        .form-group
+          label(for='passwordInput') Confirm Password:
+          input#conf-password.form-control(type='password',name="confpassword", placeholder='Confirm password', required)
+        button.btn.btn-primary.edit-profile(type='submit') Update
