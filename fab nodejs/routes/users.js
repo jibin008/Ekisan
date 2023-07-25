@@ -44,19 +44,30 @@ exports.login = function(req, res) {
   uname = req.body.uname;
   pswd = req.body.pswd;
   console.log("----------------------");
-  db.query ( 'SELECT * FROM login_table WHERE email_id = "' + uname + '" and password = "' + pswd + '" and status = 1',function(err, result) {
-    console.log(result);
-    console.log(err);
+  db.query ('SELECT * FROM login_table WHERE email_id = "' + uname + '" and password = "' + pswd + '" and status = 1',function(err, result) {
+    console.log("----0000----")
     if (err) throw err;
     if(result.length > 0) {
       req.session.ut = result[0].usertype;
       req.session.uid = result[0].id;
+      console.log(req.session.ut);
+      if(req.session.ut==3){
+        console.log("----1----")
+        res.redirect('/crop')
+      }
+      else {
+        res.redirect('/')
+      }
+
     }
-    res.redirect('/')
+    else {
+      res.redirect('/')
+    }
   });
 }
 exports.crop = function(req, res) {
   data=[];
+  
   if(req.method == 'POST') {
     if (!req.files) {
       return res.status(400).send("No files were uploaded.");
@@ -70,8 +81,7 @@ exports.crop = function(req, res) {
           // console.log(err);
           res.send("Failed !!");
         } else{
-          db.query(`INSERT INTO crop_tb (cropname,cropimage,about_crop,quantity,unit,price)
-            VALUES("${req.body.crop_name}", "${uploadedFile.name}","${req.body.about_crop}","${req.body.quantity}","${req.body.unit}","${req.body.price}" ) )`,function(err, result) {
+          db.query(`INSERT INTO crop_tb (cropname,cropimage,about_crop,quantity,unit,price,category) VALUES("${req.body.crop_name}", "${uploadedFile.name}","${req.body.about_crop}","${req.body.quantity}","${req.body.unit}","${req.body.price}", "${req.body.slt_category}" )`,function(err, result) {
             if (err) throw err;
             res.render('crop')
           });
@@ -79,7 +89,16 @@ exports.crop = function(req, res) {
       })
     }
   }
-  const query = 'SELECT * FROM crop_tb';
+  var query = 'SELECT * FROM crop_tb';
+  if(req.query.i == 'v') {
+    query = "SELECT * FROM crop_tb WHERE category='vegetables'";
+  }
+  else if(req.query.i == 'f') {
+    query = "SELECT * FROM crop_tb WHERE category='fruits'";
+  }
+  else if(req.query.i == 'c') {
+    query = "SELECT * FROM crop_tb WHERE category='cereals'";
+  }
   db.query(query, (err, results) => {
     if (err) {
       console.error('Error executing the query:', err);

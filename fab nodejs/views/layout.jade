@@ -77,8 +77,22 @@ html(lang='en')
               li
                 a(href='/rent') Rent
             li
-              a(href='/crop') Crops
-            - if(req && req.session && req.session.ut && req.session.ut != 1)
+              li.dropdown
+                a(href='#')
+                  span Product
+                  i.bi.bi-chevron-down
+                ul
+                  li
+                    a(href='/crop?i=v') Vegitables
+                  li
+                    a(href='/crop?i=f') Fruits
+                  li
+                    a(href='/crop?i=c') Cereal
+
+
+
+
+
               li
                 a(href='/cart') Cart
             - if(req && req.session && req.session.uid)
@@ -111,6 +125,7 @@ html(lang='en')
       script(src='vendor/swiper/swiper-bundle.min.js')
       script(src='vendor/waypoints/noframework.waypoints.js')
       script(src='vendor/php-email-form/validate.js')
+      script(src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js")
       // Template Main JS File
       script(src='js/jquery.min.js')
       script(src='js/script.js')

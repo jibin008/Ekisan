@@ -4,6 +4,9 @@ block content
   .container
     - if(req.session.ut == 1)
       button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#cropModal') Add new
+    a(href='/crop?i=v').btn.btn-danger(type="button") Vegtables
+    a(href='/crop?i=f').btn.btn-danger(type="button") Fruits
+    a(href='/crop?i=c').btn.btn-danger(type="button") Cereals
     .row
       each cp in data
           .col-md-4.col-lg-3
@@ -11,6 +14,7 @@ block content
               img(src='/uploads/' + cp.cropimage, alt='Product 1', class='product-image' width= '100%')
               h4= cp.cropname
               p= cp.about_drop
+              p= cp.category
               .price
                 span.label Rs:
                 span.value= cp.price
@@ -57,4 +61,11 @@ block content
               .form-group
                 label(for="price") Price:
                 input#price.form-control(type="number",name="price")
+              .form-group
+                label(for='categorySelect') Category:
+                select#categorySelect.form-control( name="slt_category",required)
+                  option(value='-1' selected disabled) Select the category
+                  option(value='vegetables') Vegetables
+                  option(value='fruits') Fruits
+                  option(value='cereals') Cereals
               button.btn.btn-primary(type="submit",value="submit") Submit
