@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2023 at 12:21 PM
+-- Generation Time: Jul 25, 2023 at 04:28 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -34,16 +34,25 @@ CREATE TABLE `crop_tb` (
   `about_crop` varchar(200) NOT NULL,
   `quantity` int(200) NOT NULL,
   `price` int(200) NOT NULL,
-  `unit` varchar(10) NOT NULL
+  `unit` varchar(10) NOT NULL,
+  `category` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `crop_tb`
 --
 
-INSERT INTO `crop_tb` (`cropid`, `cropname`, `cropimage`, `about_crop`, `quantity`, `price`, `unit`) VALUES
-(1, 'abc', '9781408856772_Z.jpg', 'hai', 4, 5, 'Kg'),
-(55, 'mkl', 'sHRDAYA pics.jpg', '', 88, 4, '');
+INSERT INTO `crop_tb` (`cropid`, `cropname`, `cropimage`, `about_crop`, `quantity`, `price`, `unit`, `category`) VALUES
+(56, 'rice', 'RiceHarvest.jpg', 'III', 20, 18000, 'kg', 'vegetables'),
+(57, 'fruit', 'goods carier.jpg', 'iii', 10, 2000, 'kg', 'fruits'),
+(58, 'fruit', 'goods carier.jpg', 'iii', 10, 2000, 'kg', 'fruits'),
+(59, 'veg', 'banana plantation.jpg', 'banana', 10, 5000, 'kg', 'vegetables'),
+(60, 'veg', 'banana plantation.jpg', 'banana', 10, 5000, 'kg', 'vegetables'),
+(61, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
+(62, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
+(63, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
+(64, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
+(65, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits');
 
 -- --------------------------------------------------------
 
@@ -357,7 +366,7 @@ ALTER TABLE `tool_tb`
 -- AUTO_INCREMENT for table `crop_tb`
 --
 ALTER TABLE `crop_tb`
-  MODIFY `cropid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `cropid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `customer`
