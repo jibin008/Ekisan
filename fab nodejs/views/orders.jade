@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-order a').addClass('active');
   .container
     .row
       -var x = 0;

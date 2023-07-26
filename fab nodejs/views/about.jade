@@ -1,52 +1,55 @@
 extends layout
 
 block content
-      h1 About Col Farming Society
-      p Welcome to Col Farming Society, a community of passionate farmers and agriculture enthusiasts working together to promote sustainable farming practices and agricultural innovation.
+      script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-about a').addClass('active');
+      .container
+        h1 About Col Farming Society
+        p Welcome to Col Farming Society, a community of passionate farmers and agriculture enthusiasts working together to promote sustainable farming practices and agricultural innovation.
+        h2 Administration
+        .member-container
+          //- President
+          .member-card
+            img.member-image(src='https://via.placeholder.com/150', alt='President')
+            h3 President
+            p
+              span Name:
+              | John Doe
+            p
+              span Email:
+              | president@colfarmsociety.com
+            p
+              span Phone:
+              | +1 (555) 123-4567
+            p John Doe is an experienced farmer and dedicated to leading our society towards a greener future.
 
-      h2 Administration
-      .member-container
-        //- President
-        .member-card
-          img.member-image(src='https://via.placeholder.com/150', alt='President')
-          h3 President
-          p
-            span Name:
-            | John Doe
-          p
-            span Email:
-            | president@colfarmingsociety.com
-          p
-            span Phone:
-            | +1 (555) 123-4567
-          p John Doe is an experienced farmer and dedicated to leading our society towards a greener future.
+          //- Secretary
+          .member-card
+            img.member-image(src='https://via.placeholder.com/150', alt='Secretary')
+            h3 Secretary
+            p
+              span Name:
+              | Jane Smith
+            p
+              span Email:
+              | secretary@colfarmsociety.com
+            p
+              span Phone:
+              | +1 (555) 987-6543
+            p Jane Smith handles all administrative tasks and ensures smooth communication within the society.
 
-        //- Secretary
-        .member-card
-          img.member-image(src='https://via.placeholder.com/150', alt='Secretary')
-          h3 Secretary
-          p
-            span Name:
-            | Jane Smith
-          p
-            span Email:
-            | secretary@colfarmingsociety.com
-          p
-            span Phone:
-            | +1 (555) 987-6543
-          p Jane Smith handles all administrative tasks and ensures smooth communication within the society.
-
-        //- Treasurer
-        .member-card
-          img.member-image(src='https://via.placeholder.com/150', alt='Treasurer')
-          h3 Treasurer
-          p
-            span Name:
-            | Michael Johnson
-          p
-            span Email:
-            | treasurer@colfarmingsociety.com
-          p
-            span Phone:
-            | +1 (555) 456-7890
-          p Michael Johnson manages the society's finances and keeps track of all monetary transactions.
+          //- Treasurer
+          .member-card
+            img.member-image(src='https://via.placeholder.com/150', alt='Treasurer')
+            h3 Treasurer
+            p
+              span Name:
+              | Michael Johnson
+            p
+              span Email:
+              | treasurer@colfarmsociety.com
+            p
+              span Phone:
+              | +1 (555) 456-7890
+            p Michael Johnson manages the society's finances and keeps track of all monetary transactions.

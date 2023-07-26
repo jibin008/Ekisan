@@ -36,6 +36,21 @@ h6 {
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
+.reg-form-wrapper {
+width: 50%;
+/* align-content: center; */
+margin: 20px auto;
+text-align: center;
+border: 1px solid;
+padding: 10px;
+box-shadow: 5px 10px #888888;
+}
+.login-form .field-group {
+  margin-bottom: 10px;
+}
+.login-form .btn {
+  margin-right: 10px;
+}
 .back-to-top {
   position: fixed;
   visibility: hidden;

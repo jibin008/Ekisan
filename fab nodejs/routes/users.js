@@ -495,7 +495,6 @@ exports.pesticide = function(req, res) {
       })
     }
   }
-  console.log(req.session.ut)
   var query = "SELECT * FROM fertilicer_tb WHERE type = 'pesticide' and Stock_Available > 0";
   if(req.session.ut == 1) {
     query = "SELECT * FROM fertilicer_tb WHERE type = 'pesticide';";
@@ -554,7 +553,7 @@ exports.about = function(req, res) {
     res.redirect('/')
   }
   else {
-    res.render('about')
+    res.render('about', {req: req})
   }
 }
 exports.registration = function(req, res) {
@@ -572,8 +571,8 @@ exports.registration = function(req, res) {
     }
     if(utval != 0) {
       db.query(`INSERT INTO login_table (
-        name,address,gender,date_of_birth,whats_app_number,email_id,password, usertype, status
-        ) VALUES ("${req.body.name_input}", "${req.body.address}", "${req.body.slt_gender}", "${req.body.date_of_birth}", "${req.body.whatsapp_num}", "${req.body.email}", "${req.body.password}","${utval}", "${stat}")`,
+        name,address,gender,date_of_birth,whats_app_number,email_id,password, usertype, status, landmark, city, pin
+        ) VALUES ("${req.body.name_input}", "${req.body.address}", "${req.body.slt_gender}", "${req.body.date_of_birth}", "${req.body.whatsapp_num}", "${req.body.email}", "${req.body.password}","${utval}", "${stat}", "${req.body.landmark}", "${req.body.city}", "${req.body.pin}")`,
       function(err, result) {
         if (err) throw err;
         // console.log('record inserted');

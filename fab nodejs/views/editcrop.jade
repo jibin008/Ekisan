@@ -1,5 +1,8 @@
 extends layout
 block content
+  script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-crop a').addClass('active');
   .container
     each cr in data
       h3 #{cr.Manufacturing_Date}

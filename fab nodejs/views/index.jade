@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-home a').addClass('active');
   .notifications.row
     .col-sm-12
       .nots

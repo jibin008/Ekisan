@@ -20,6 +20,7 @@ html(lang='en')
     link(href='vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
     // Template Main CSS File
     link(href='stylesheets/style.css' rel='stylesheet')
+    script(src='js/jquery.min.js')
     //
       =======================================================
       * Template Name: Eterna
@@ -46,55 +47,50 @@ html(lang='en')
           // Uncomment below if you prefer to use an image logo
           // <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
         nav#navbar.navbar
-          ul
-            li
+          ul.ul-nav
+            li.li-home
               a.active(href='/') Home
-            li
+            li.li-about
               a(href='/about') About
             - if(req && req.session && req.session.ut == 1)
-              li
+              li.li-notification
                 a(href='/notification') Notifications
-              li
+              li.li-user
                 a(href='/users') Users
             - if(req && req.session && (req.session.ut == 1 || req.session.ut == 2))
-              li
+              li.li-fertilizer
                 a(href='/fertilicer') Fertilizer
-              li
+              li.li-pesticide
                 a(href='/pesticide') Pesticides
-              li
+              li.li-seed
                 a(href='/seed') Seeds
-              li
+              li.li-tool
                 a(href='/tool') Tools
-              li
+              li.li-rent
                 a(href='/rent') Rent
-            li
-              li.dropdown
-                a(href='#')
-                  span Product
-                  i.bi.bi-chevron-down
-                ul
-                  li
-                    a(href='/crop?i=v') Vegitables
-                  li
-                    a(href='/crop?i=f') Fruits
-                  li
-                    a(href='/crop?i=c') Cereal
+            li.dropdown.li-crop
+              a(href='#')
+                span Product
+                i.bi.bi-chevron-down
+              ul
+                li
+                  a(href='/crop?i=v') Vegitables
+                li
+                  a(href='/crop?i=f') Fruits
+                li
+                  a(href='/crop?i=c') Cereal
 
-
-
-
-
-              li
-                a(href='/cart') Cart
             - if(req && req.session && req.session.uid)
-              li
+              li.li-cart
+                a(href='/cart') Cart
+              li.li-order
                 a(href='/order') Orders
-              li
+              li.li-profile
                 a(href='/profile') Profile
-              li
+              li.li-logout
                 a(href='/logout') Logout
             - else
-              li.dropdown
+              li.dropdown.li-register
                 a(href='#')
                   span Register
                   i.bi.bi-chevron-down
@@ -103,7 +99,7 @@ html(lang='en')
                     a(href='/registration?u=f') Farmer
                   li
                     a(href='/registration?u=p') Public
-                li
+                li.li-pesticides
                   a(data-bs-toggle='modal' data-bs-target='#exampleModal') Login
           i.bi.bi-list.mobile-nav-toggle
         // .navbar
@@ -118,7 +114,6 @@ html(lang='en')
       script(src='vendor/php-email-form/validate.js')
       script(src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js")
       // Template Main JS File
-      script(src='js/jquery.min.js')
       script(src='js/script.js')
       script(src='js/main.js')
     // ======= Footer ======= 

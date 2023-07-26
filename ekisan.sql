@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2023 at 04:28 PM
+-- Generation Time: Jul 26, 2023 at 11:03 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -46,7 +46,7 @@ INSERT INTO `crop_tb` (`cropid`, `cropname`, `cropimage`, `about_crop`, `quantit
 (56, 'rice', 'RiceHarvest.jpg', 'III', 20, 18000, 'kg', 'vegetables'),
 (57, 'fruit', 'goods carier.jpg', 'iii', 10, 2000, 'kg', 'fruits'),
 (58, 'fruit', 'goods carier.jpg', 'iii', 10, 2000, 'kg', 'fruits'),
-(59, 'veg', 'banana plantation.jpg', 'banana', 10, 5000, 'kg', 'vegetables'),
+(59, 'veg', 'banana plantation.jpg', 'banana', 8, 5000, 'kg', 'vegetables'),
 (60, 'veg', 'banana plantation.jpg', 'banana', 10, 5000, 'kg', 'vegetables'),
 (61, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
 (62, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
@@ -144,18 +144,22 @@ CREATE TABLE `login_table` (
   `email_id` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `usertype` int(11) NOT NULL COMMENT '1: admin\r\n2: Farmer\r\n3: Customer',
-  `status` int(11) NOT NULL COMMENT '0: unapproved\r\n1: Approved'
+  `status` int(11) NOT NULL COMMENT '0: unapproved\r\n1: Approved',
+  `landmark` varchar(100) NOT NULL,
+  `city` varchar(20) NOT NULL,
+  `pin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `login_table`
 --
 
-INSERT INTO `login_table` (`id`, `name`, `address`, `gender`, `date_of_birth`, `whats_app_number`, `email_id`, `password`, `usertype`, `status`) VALUES
-(1, 'Admin', 'nayankara', 'male', '2023-06-09', 2147483647, 'admin@gmail.com', 'admin', 1, 1),
-(3, 'abcd', 'abcd', 'male', '1991-06-01', 987654321, 'a@gmail.com', 'a', 2, 1),
-(4, 'f', 'faddress', 'male', '2004-06-24', 987654321, 'f@gmail.cof@gmail.com', 'f', 3, 1),
-(5, 'c', 'caddress', 'male', '1994-09-25', 987654321, 'cu@gmail.com', 'cu', 3, 1);
+INSERT INTO `login_table` (`id`, `name`, `address`, `gender`, `date_of_birth`, `whats_app_number`, `email_id`, `password`, `usertype`, `status`, `landmark`, `city`, `pin`) VALUES
+(1, 'Admin', 'nayankara', 'male', '2023-06-09', 2147483647, 'admin@gmail.com', 'admin', 1, 1, '', '', 0),
+(3, 'abcd', 'abcd', 'male', '1991-06-01', 987654321, 'a@gmail.com', 'a', 2, 1, '', '', 0),
+(4, 'f', 'faddress', 'male', '2004-06-24', 987654321, 'f@gmail.cof@gmail.com', 'f', 3, 1, '', '', 0),
+(5, 'c', 'caddress', 'male', '1994-09-25', 987654321, 'cu@gmail.com', 'cu', 3, 1, '', '', 0),
+(6, 'cus', 'h41', 'male', '2001-06-08', 987654321, 'cus@gmail.com', 'cus', 3, 1, 'near bheema', 'Thrissur', 680020);
 
 -- --------------------------------------------------------
 
@@ -206,7 +210,8 @@ INSERT INTO `order_tb` (`id`, `uid`, `item_id`, `date`, `qty`, `address`, `amoun
 (5, 3, 599, '2023-07-02', 2, 'asss', 3, 1, 1),
 (6, 3, 590, '0000-00-00', 3, 'undefined', 2, 2, 1),
 (7, 3, 14, '0000-00-00', 5, 'undefined', 45, 4, 1),
-(8, 3, 55, '2023-07-02', 3, '', 12, 3, 0);
+(8, 3, 55, '2023-07-02', 3, '', 12, 3, 0),
+(9, 6, 59, '2023-07-26', 2, 'gdhdggag', 10000, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -384,7 +389,7 @@ ALTER TABLE `fertilicer_tb`
 -- AUTO_INCREMENT for table `login_table`
 --
 ALTER TABLE `login_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `notification_tb`
@@ -396,7 +401,7 @@ ALTER TABLE `notification_tb`
 -- AUTO_INCREMENT for table `order_tb`
 --
 ALTER TABLE `order_tb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `rent_tb`

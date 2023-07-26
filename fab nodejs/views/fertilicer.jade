@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-fertilizer a').addClass('active');
   .container
     - if(req.session.ut == 1)
       button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#fertModal') Add new

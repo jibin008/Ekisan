@@ -1,32 +1,45 @@
 extends layout
 
 block content
+    script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-register a').addClass('active');
     .container
-      h1 Registration Form
-      form(method="POST" action="")
-        .form-group
-          label(for='nameInput') Name:
-          input#nameInput.form-control(type='text', placeholder='Enter your name',name="name_input" required)
-        .form-group
-          label(for='addressInput') Address:
-          input#addressInput.form-control(type='text', placeholder='Enter your address',name="address" required)
-        .form-group
-          label(for='genderSelect') Gender:
-          select#genderSelect.form-control( name="slt_gender",required)
-            option(value='-1' selected disabled) Select your gender
-            option(value='male') Male
-            option(value='female') Female
-            option(value='other') Other
-        .form-group
-          label(for='dobInput') Date of Birth:
-          input#dobInput.form-control(type='date',name="date_of_birth", required)
-        .form-group
-          label(for='whatsappInput') WhatsApp Number:
-          input#whatsappInput.form-control(type='tel', placeholder='Enter your WhatsApp number',name="whatsapp_num", required)
-        .form-group
-          label(for='emailInput') Email:
-          input#emailInput.form-control(type='email', placeholder='Enter your email',name="email", required)
-        .form-group
-          label(for='passwordInput') Password:
-          input#passwordInput.form-control(type='password',name="password", placeholder='Enter your password', required)
-        button.btn.btn-primary.register(type='submit') Register
+      .reg-form-wrapper
+        h1 Registration Form
+        form(method="POST" action="")
+          .form-group
+            label(for='nameInput') Name:
+            input#nameInput.form-control(type='text', placeholder='Enter your name',name="name_input" required)
+          .form-group
+            label(for='addressInput') House Name/ No:
+            input#addressInput.form-control(type='text', placeholder='Enter your house name/no',name="address" required)
+          .form-group
+            label(for='addressInput') Landmark:
+            input#addressInput.form-control(type='text', placeholder='Enter your landmar',name="landmark" required)
+          .form-group
+            label(for='addressInput') City:
+            input#addressInput.form-control(type='text', placeholder='Enter your city',name="city" required)
+          .form-group
+            label(for='addressInput') Pin:
+            input#addressInput.form-control(type='text', placeholder='Enter your pin code',name="pin" required)
+          .form-group
+            label(for='genderSelect') Gender:
+            select#genderSelect.form-control( name="slt_gender",required)
+              option(value='-1' selected disabled) Select your gender
+              option(value='male') Male
+              option(value='female') Female
+              option(value='other') Other
+          .form-group
+            label(for='dobInput') Date of Birth:
+            input#dobInput.form-control(type='date',name="date_of_birth", required)
+          .form-group
+            label(for='whatsappInput') WhatsApp Number:
+            input#whatsappInput.form-control(type='tel', placeholder='Enter your WhatsApp number',name="whatsapp_num", required)
+          .form-group
+            label(for='emailInput') Email:
+            input#emailInput.form-control(type='email', placeholder='Enter your email',name="email", required)
+          .form-group
+            label(for='passwordInput') Password:
+            input#passwordInput.form-control(type='password',name="password", placeholder='Enter your password', required)
+          button.btn.btn-primary.register(type='submit') Register

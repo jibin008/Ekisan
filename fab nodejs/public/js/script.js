@@ -121,4 +121,38 @@ $(document).ready(function(){
             return false;
         }
     })
+    $('.btn-submit-pay').click(function(){
+        var number = $('.number').val();
+        var cvv = $('.cvv').val();
+        var d = $('.exp-date').val();
+        var flag = true;
+        if(number.length != 16){
+            flag = false 
+            alert("invalid card number");
+        }
+        else if(cvv.length != 3){
+            flag = false 
+            alert("invalid cvv number"); 
+        }
+        else if(d.length != 5){
+            flag = false 
+            alert("invalid validity date");
+        }
+        if(!flag) {
+            return false;
+        }
+    })
+    $('.exp-date').on('keyup',function(){
+        var x = $(this).val();
+        var y = x.replace('/', '');
+        if(!$.isNumeric(y)){
+            $(this).val(x.substring(0, x.length-1));
+        }
+        if(x.length == 2){
+            $(this).val(x + "/");
+        }
+        if(x.length > 5){
+            $(this).val(x.substring(0, 5));
+        }
+    })
 });

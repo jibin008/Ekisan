@@ -1,5 +1,8 @@
 extends layout
 block content
+  script. 
+        $('.ul-nav .active').removeClass('active');
+        $('.ul-nav .li-tool a').addClass('active');
   .container
 
     form(method="POST" action="" enctype="multipart/form-data")
