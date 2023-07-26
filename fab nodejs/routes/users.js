@@ -50,6 +50,7 @@ exports.login = function(req, res) {
     if(result.length > 0) {
       req.session.ut = result[0].usertype;
       req.session.uid = result[0].id;
+      req.session.un = result[0].name;
       console.log(req.session.ut);
       if(req.session.ut==3){
         console.log("----1----")
@@ -486,10 +487,10 @@ exports.pesticide = function(req, res) {
         if (err) {
           res.send("Failed !!");
         } else{
-          db.query ( `INSERT INTO fertilicer_tb (type,Fertilizer_Name,About_Fertilizer,Manufacturing_Date,Expiry_Date,Stock_Available,fertilizer_image,,unit,price
+          db.query ( `INSERT INTO fertilicer_tb (type,Fertilizer_Name,About_Fertilizer,Manufacturing_Date,Expiry_Date,Stock_Available,fertilizer_image,unit,price
             ) VALUES ( "pesticide","${req.body.pesticide_name}","${req.body.about_pesticide}","${req.body.manufacturing_date}","${req.body.expiry_date}","${req.body.stock_available}", "${uploadedFile.name}","${req.body.unit}","${req.body.price}")`,function(err, result) {
             if (err) throw err;
-              res.render('pesticide', {req: req})
+              //res.render('pesticide', {req: req})
           });
         }
       })

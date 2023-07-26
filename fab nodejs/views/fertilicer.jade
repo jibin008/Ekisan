@@ -9,27 +9,25 @@ block content
       button.btn.btn-warning(type="button" data-bs-toggle='modal' data-bs-target='#fertModal') Add new
     .row
       each fer in data
-        .col-sm-6.col-md-4
-          .row
-            .col-md-4
-              .product-card
-                img(src='/uploads/' + fer.fertilizer_image, alt='Product 1', class='product-image' style="width: 200%;")
-                h4= fer.Fertilizer_Name
-                p= fer.About_Fertilizer
-                - var x = moment(fer.Expiry_Date).format('YYYY-MM-DD')
-                if(x != "Invalid date")
-                  p
-                    span.label Exp:
-                    span.value= x
-                .price
-                  span.label Rs:
-                  span.value= fer.price
-                  span.value / #{fer.unit}
-                p.stock(data-st="#{fer.Stock_Available}") (#{fer.Stock_Available} Available)
-                - if(req.session.ut == 1)
-                  a.btn.btn-primary.edit-button(href='/editfertilizer?id=' + fer.Fertilizer_ID ) Edit
-                - if(req.session.ut == 2)
-                  button.btn.btn-primary.cart-button(data-id = fer.Fertilizer_ID data-type = "1" type="button" data-bs-toggle='modal' data-bs-target='#qtyModal') Add to cart
+        .col-sm-6.col-md-4.col-lg-3
+          .product-card
+            img(src='/uploads/' + fer.fertilizer_image, alt='Product 1', class='product-image')
+            h4= fer.Fertilizer_Name
+            p= fer.About_Fertilizer
+            - var x = moment(fer.Expiry_Date).format('YYYY-MM-DD')
+            if(x != "Invalid date")
+              p
+                span.label Exp:
+                span.value= x
+            .price
+              span.label Rs:
+              span.value= fer.price
+              span.value / #{fer.unit}
+            p.stock(data-st="#{fer.Stock_Available}") (#{fer.Stock_Available} Available)
+            - if(req.session.ut == 1)
+              a.btn.btn-primary.edit-button(href='/editfertilizer?id=' + fer.Fertilizer_ID ) Edit
+            - if(req.session.ut == 2)
+              button.btn.btn-primary.cart-button(data-id = fer.Fertilizer_ID data-type = "1" type="button" data-bs-toggle='modal' data-bs-target='#qtyModal') Add to cart
     #qtyModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
       .modal-dialog
         .modal-content

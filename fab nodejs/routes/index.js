@@ -12,6 +12,9 @@ router.get('/', function(req, res, next) {
       console.log(data);
       res.render('index', { title: 'Express', name: "Hello", req: req, nt: result });
     }
+    else {
+      res.render('index', { title: 'Express', name: "Hello", req: req, nt: [] });
+    }
   });
 });
 

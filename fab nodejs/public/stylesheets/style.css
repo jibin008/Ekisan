@@ -1406,7 +1406,13 @@ section {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
+.un {
+  color: #fff;
+}
+.product-card img{
+  max-height: 200px;
+  width: auto;
+}
 .member-card h3 {
   color: #006400;
   margin-bottom: 15px;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2023 at 11:03 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.23
+-- Generation Time: Jul 26, 2023 at 04:14 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,23 +36,17 @@ CREATE TABLE `crop_tb` (
   `price` int(200) NOT NULL,
   `unit` varchar(10) NOT NULL,
   `category` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `crop_tb`
 --
 
 INSERT INTO `crop_tb` (`cropid`, `cropname`, `cropimage`, `about_crop`, `quantity`, `price`, `unit`, `category`) VALUES
-(56, 'rice', 'RiceHarvest.jpg', 'III', 20, 18000, 'kg', 'vegetables'),
-(57, 'fruit', 'goods carier.jpg', 'iii', 10, 2000, 'kg', 'fruits'),
-(58, 'fruit', 'goods carier.jpg', 'iii', 10, 2000, 'kg', 'fruits'),
-(59, 'veg', 'banana plantation.jpg', 'banana', 8, 5000, 'kg', 'vegetables'),
-(60, 'veg', 'banana plantation.jpg', 'banana', 10, 5000, 'kg', 'vegetables'),
-(61, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
-(62, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
-(63, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
-(64, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits'),
-(65, 'fruit', 'tractor.jpg', 'gg', 20, 10000, 'kg', 'fruits');
+(66, 'Ladiesfinger', 'venda.png', '', 98, 30, '1', 'vegetables'),
+(67, 'water melon', 'watermelon.jpg', 'Tasty natural watermelon', 10, 20, '1', 'fruits'),
+(68, 'Koorka', 'kooraka.jpg', '', 40, 25, '1', 'vegetables'),
+(69, 'k gold', 'rice.png', 'Its\'s our own brand', 499, 39, '1', 'cereals');
 
 -- --------------------------------------------------------
 
@@ -64,17 +58,7 @@ CREATE TABLE `customer` (
   `name` varchar(255) DEFAULT NULL,
   `age` varchar(255) DEFAULT NULL,
   `email` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`name`, `age`, `email`) VALUES
-('hjhg', '56', 2),
-('jibin', '12', 3),
-('jibin', '12', 4),
-('jj', '12', 5);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -93,40 +77,19 @@ CREATE TABLE `fertilicer_tb` (
   `fertilizer_image` char(200) NOT NULL,
   `unit` varchar(10) NOT NULL,
   `price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `fertilicer_tb`
 --
 
 INSERT INTO `fertilicer_tb` (`type`, `Fertilizer_ID`, `Fertilizer_Name`, `About_Fertilizer`, `Manufacturing_Date`, `Expiry_Date`, `Stock_Available`, `fertilizer_image`, `unit`, `price`) VALUES
-('', 578, 'bhg', 'fggh h', '2023-06-15', '2023-06-17', 5, 'smile jibin.jpg', '', 0),
-('', 579, 'ghh', 'hhh', '2023-06-23', '2023-06-24', 5, 'sHRDAYA pics.jpg', '', 0),
-('', 580, 'kkj', 'jhj ', '2023-06-04', '2023-06-25', 6, 'WhatsApp Image 2023-02-09 at 00.37.27.jpg', '', 0),
-('undefined', 581, 'abishek', 'fcgbvhbjkm', '2023-06-08', '2023-09-09', 4, 'denial of service.png', '', 0),
-('undefined', 582, '.kjlj', 'guhg koi', '2023-06-15', '2023-06-24', 6, 'mariya image1.jpg', '', 0),
-('undefined', 583, 'khvkjhb', 'yfig', '2022-08-10', '2023-06-30', 5, 'multiple.png', '', 0),
-('undefined', 584, 'abimanyu', 'vhbjuh', '2023-06-03', '2023-06-24', 8, 'denial of service.png', '', 0),
-('undefined', 585, 'abimanyu', 'vhbjuh', '2023-06-03', '2023-06-24', 8, 'denial of service.png', '', 0),
-('fertilizer', 586, 'hjj', 'kuui', '2023-06-09', '2023-06-24', 6, 'denial of service.png', '', 0),
-('fertilizer', 587, 'www', 'kjkj', '2023-06-13', '2023-07-07', 5, 'denial of service.png', '', 0),
-('fertilizer', 588, 'jibin', 'huu hh', '2023-06-14', '2023-06-15', 5, 'multiple.png', '', 0),
-('fertilizer', 589, 'uuii', 'hjj', '2023-06-10', '2023-06-24', 5, 'denial of service.png', '', 0),
-('pesticide', 590, 'sarukh', 'good boy', '2023-06-17', '2023-06-24', 5, '7-year-old_prodigy_becomes_the_1200x768.webp', '', 0),
-('pesticide', 591, 'jlkj', 'jkjkn', '2023-06-29', '2023-06-30', 5, '9781408856772_Z.jpg', '', 0),
-('pesticide', 592, 'sarath', 'jkj', '2023-06-23', '2023-06-30', 0, 'mariya image1.jpg', '', 0),
-('pesticide', 593, 'saharukh', 'jk jk', '2023-06-14', '2023-06-30', 8, 'denial of service.png', '', 0),
-('fertilizer', 594, 'kmlkm', 'klkm', '2023-06-15', '2023-06-16', 10, 'denial of service.png', '', 0),
-('fertilizer', 595, 'huh', 'b b ', '2023-06-16', '2023-06-30', 19, 'nss.png', '', 0),
-('fertilizer', 596, 'jk', 'hjbj', '2023-06-17', '2023-06-25', 8, 'sHRDAYA pics.jpg', '', 0),
-('fertilizer', 597, 'jnjknk', 'knk', '2023-06-14', '2023-06-16', 5, 'sHRDAYA pics.jpg', '', 0),
-('fertilicer', 598, 'frt', 'abt', '0000-00-00', '0000-00-00', 0, '9781408856772_Z.jpg', 'Kg', 70),
-('fertilicer', 599, 'new name', 'bjkb', '2023-06-20', '2023-08-04', 3, 'WhatsApp Image 2023-02-09 at 00.37.27.jpg', '', 0),
-('fertilicer', 600, 'sarath', 'jkjkllk', '2000-11-09', '2023-06-26', 1, 'kandam.jpg', '', 0),
-('fertilicer', 601, 'sharukh', 'gvjh ikjkj', '0000-00-00', '0000-00-00', 10, 'goods carier.jpg', '', 0),
-('fertilicer', 602, 'jak', 'it was good', '2023-06-22', '2023-06-30', 10, 'RiceHarvest.jpg', '', 0),
-('fertilicer', 603, 'Frt', 'abcd', '2023-06-22', '2023-07-06', 41, '7-year-old_prodigy_becomes_the_1200x768.webp', '', 0),
-('fertilicer', 604, 'Frtz', 'ssss', '2023-06-23', '2023-07-09', 22, '9781408856772_Z.jpg', '', 0);
+('fertilicer', 605, '', 'Multiplex liquid fertilizer is used to maximise output by best possible yield with the lowest possible Nutrient losses', '2023-07-26', '2023-08-30', 50, 'multiplexer.png', '1', 50),
+('fertilicer', 606, '', 'cially in the production of starch, sugars, oils, fats, and vitamins. Since sulfur plays a key role in forming chlorophyll, which in turn allows plants to produce these important ingredients, a sulfur', '2023-07-26', '2023-09-26', 100, 'sulpher.png', '1', 100),
+('pesticide', 607, 'Pest 1', 'new item', '2023-07-04', '2023-07-30', 5, 'pesticide1.png', '12', 222),
+('pesticide', 608, 'Pest 2', 'Dan', '2023-07-01', '2023-08-04', 96, 'Screenshot 2023-07-26 171136.png', 'ltr', 966),
+('pesticide', 609, 'Pest 3', 'Good', '2023-07-02', '2023-08-06', 96, 'sulpher.png', 'ltr', 56),
+('pesticide', 610, 'Pest 5', 'Good result', '2023-06-29', '2023-07-30', 33, 'Screenshot 2023-07-26 171136.png', 'ltr', 96);
 
 -- --------------------------------------------------------
 
@@ -148,7 +111,7 @@ CREATE TABLE `login_table` (
   `landmark` varchar(100) NOT NULL,
   `city` varchar(20) NOT NULL,
   `pin` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `login_table`
@@ -157,9 +120,10 @@ CREATE TABLE `login_table` (
 INSERT INTO `login_table` (`id`, `name`, `address`, `gender`, `date_of_birth`, `whats_app_number`, `email_id`, `password`, `usertype`, `status`, `landmark`, `city`, `pin`) VALUES
 (1, 'Admin', 'nayankara', 'male', '2023-06-09', 2147483647, 'admin@gmail.com', 'admin', 1, 1, '', '', 0),
 (3, 'abcd', 'abcd', 'male', '1991-06-01', 987654321, 'a@gmail.com', 'a', 2, 1, '', '', 0),
-(4, 'f', 'faddress', 'male', '2004-06-24', 987654321, 'f@gmail.cof@gmail.com', 'f', 3, 1, '', '', 0),
 (5, 'c', 'caddress', 'male', '1994-09-25', 987654321, 'cu@gmail.com', 'cu', 3, 1, '', '', 0),
-(6, 'cus', 'h41', 'male', '2001-06-08', 987654321, 'cus@gmail.com', 'cus', 3, 1, 'near bheema', 'Thrissur', 680020);
+(6, 'cus', 'h41', 'male', '2001-06-08', 987654321, 'cus@gmail.com', 'cus', 3, 1, 'near bheema', 'Thrissur', 680020),
+(7, 'Abishek', 'meleveetil', 'male', '2000-11-09', 2147483647, 'abishek@gmail.com', 'abishek', 2, 1, 'Athani', 'Thrissur', 680563),
+(8, 'sharukh', 'Thoppil parambil', 'male', '2000-07-02', 2147483647, 'sharukh@gmail.com', 'sharukh', 3, 1, 'mapranam', 'Irinjalakuda', 680587);
 
 -- --------------------------------------------------------
 
@@ -171,14 +135,14 @@ CREATE TABLE `notification_tb` (
   `Notification_ID` int(200) NOT NULL,
   `Notification_Content` varchar(200) NOT NULL,
   `link` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `notification_tb`
 --
 
 INSERT INTO `notification_tb` (`Notification_ID`, `Notification_Content`, `link`) VALUES
-(1, 'j jiohiiiu', '');
+(5667, 'PM Kisan Samman nidhi', 'https://www.pmkisan.gov.in/');
 
 -- --------------------------------------------------------
 
@@ -196,22 +160,18 @@ CREATE TABLE `order_tb` (
   `amount` int(11) NOT NULL,
   `item_type` int(11) NOT NULL COMMENT '1: fer\r\n2: pest\r\n3: crop\r\n4: seed',
   `status` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_tb`
 --
 
 INSERT INTO `order_tb` (`id`, `uid`, `item_id`, `date`, `qty`, `address`, `amount`, `item_type`, `status`) VALUES
-(1, 3, 600, '0000-00-00', 1, 'undefined', 3, 1, 1),
-(2, 3, 603, '0000-00-00', 2, 'undefined', 5, 1, 1),
-(3, 3, 603, '0000-00-00', 20, 'undefined', 34, 1, 1),
-(4, 3, 1, '0000-00-00', 3, 'undefined', 32, 3, 1),
-(5, 3, 599, '2023-07-02', 2, 'asss', 3, 1, 1),
-(6, 3, 590, '0000-00-00', 3, 'undefined', 2, 2, 1),
-(7, 3, 14, '0000-00-00', 5, 'undefined', 45, 4, 1),
-(8, 3, 55, '2023-07-02', 3, '', 12, 3, 0),
-(9, 6, 59, '2023-07-26', 2, 'gdhdggag', 10000, 3, 1);
+(10, 3, 606, '2023-07-26', 4, 'chalakudi', 400, 1, 1),
+(11, 5, 66, '2023-07-26', 2, 'irinjalakuda', 60, 3, 1),
+(12, 3, 605, '2023-07-26', 3, 'chalakudi', 150, 1, 1),
+(13, 3, 605, '2023-07-26', 3, 'hhjj', 150, 1, 1),
+(14, 3, 69, '2023-07-26', 1, 'jjj', 39, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -230,17 +190,7 @@ CREATE TABLE `rent_tb` (
   `address` varchar(200) NOT NULL,
   `duration_unit` int(11) NOT NULL,
   `qty` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `rent_tb`
---
-
-INSERT INTO `rent_tb` (`id`, `uid`, `tid`, `booking_date`, `booked_for`, `duration`, `status`, `address`, `duration_unit`, `qty`) VALUES
-(1, 3, 1, '2023-07-02', '0000-00-00', 2, 0, 'lkj', 2, 1),
-(2, 3, 4555, '2023-07-02', '0000-00-00', 3, 0, 'r', 1, 1),
-(3, 3, 1, '2023-07-02', '0000-00-00', 2, 0, '222', 2, 1),
-(4, 3, 4555, '2023-07-02', '2023-07-20', 2, 0, '222', 2, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -258,20 +208,14 @@ CREATE TABLE `seed_tb` (
   `stock_available` int(200) NOT NULL,
   `unit` varchar(10) NOT NULL,
   `price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `seed_tb`
 --
 
 INSERT INTO `seed_tb` (`seed_id`, `seed_name`, `seed_image`, `about_seed`, `manufacturing_date`, `expiry_date`, `stock_available`, `unit`, `price`) VALUES
-(12, 'hj', 'Untitled-design-6.jpg', 'hkjjk hiij', '2023-06-29', '2022-05-04', 2, 'Item', 3),
-(13, 'ghj', '9781408856772_Z.jpg', 'sssssss', '2023-06-29', '2023-06-04', 3, '', 0),
-(14, 'arunthathi', '7-year-old_prodigy_becomes_the_1200x768.webp', 'it was good', '2023-06-29', '2023-06-24', 9, 'Kg', 9),
-(15, 'jwala', 'WhatsApp Image 2023-02-09 at 00.37.27.jpg', 'jj jkjkj', '2023-06-10', '2023-06-30', 3, '', 0),
-(16, 'rama', 'nss.png', 'about rmanan', '2023-06-14', '2023-06-30', 4, '', 0),
-(17, 'jjgh', 'pestisides.jpg', 'mmmk', '2023-06-30', '2023-07-09', 5, '', 0),
-(18, 'jjh', '7-year-old_prodigy_becomes_the_1200x768.webp', 'aaa', '2023-06-30', '2023-07-20', 2, 'Kg', 23);
+(19, 'navara ', 'navara1.png', 'Kerala heritage rice', '2023-07-26', '2024-12-12', 10, '5', 250);
 
 -- --------------------------------------------------------
 
@@ -288,21 +232,15 @@ CREATE TABLE `tool_tb` (
   `Number_of_Tools` int(200) NOT NULL,
   `day_rent` int(11) NOT NULL,
   `hour_rent` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tool_tb`
 --
 
 INSERT INTO `tool_tb` (`Tool_ID`, `Tool_Name`, `Tool_image`, `Manufacturing_Date`, `License_Number`, `Number_of_Tools`, `day_rent`, `hour_rent`) VALUES
-(1, 'jghhjg', '7-year-old_prodigy_becomes_the_1200x768.webp', '2023-06-11', '98765', 4, 0, 0),
-(4555, '459nn', 'IMG_7443.JPG', '2023-06-25', 'jkk55', 5, 0, 0),
-(4556, 'jjkk', 'sHRDAYA pics.jpg', '2023-06-10', '5454545', 5, 0, 0),
-(4557, 'jjkk', 'sHRDAYA pics.jpg', '2023-06-10', '5454545', 5, 0, 0),
-(4558, 'jjkk', 'sHRDAYA pics.jpg', '2023-06-10', '5454545', 5, 0, 0),
-(4559, 'jjkk', 'sHRDAYA pics.jpg', '2023-06-10', '5454545', 5, 0, 0),
-(4560, 'jjkk', 'sHRDAYA pics.jpg', '2023-06-10', '5454545', 5, 0, 0),
-(4561, 'jjkk', 'sHRDAYA pics.jpg', '2023-06-10', '5454545', 5, 0, 0);
+(4562, 'Tractor', 'tractor.png', '2023-07-26', 'KL089', 5, 0, 300),
+(4563, 'Tiller', 'tiller machine.png', '2023-07-26', 'KL008567', 7, 0, 200);
 
 --
 -- Indexes for dumped tables
@@ -371,7 +309,7 @@ ALTER TABLE `tool_tb`
 -- AUTO_INCREMENT for table `crop_tb`
 --
 ALTER TABLE `crop_tb`
-  MODIFY `cropid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `cropid` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -383,25 +321,25 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `fertilicer_tb`
 --
 ALTER TABLE `fertilicer_tb`
-  MODIFY `Fertilizer_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=605;
+  MODIFY `Fertilizer_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=611;
 
 --
 -- AUTO_INCREMENT for table `login_table`
 --
 ALTER TABLE `login_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `notification_tb`
 --
 ALTER TABLE `notification_tb`
-  MODIFY `Notification_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5667;
+  MODIFY `Notification_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5668;
 
 --
 -- AUTO_INCREMENT for table `order_tb`
 --
 ALTER TABLE `order_tb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `rent_tb`
@@ -413,13 +351,13 @@ ALTER TABLE `rent_tb`
 -- AUTO_INCREMENT for table `seed_tb`
 --
 ALTER TABLE `seed_tb`
-  MODIFY `seed_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `seed_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tool_tb`
 --
 ALTER TABLE `tool_tb`
-  MODIFY `Tool_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4562;
+  MODIFY `Tool_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4564;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
